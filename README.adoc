@@ -1,0 +1,39 @@
+[,txt]
+----
+  _ __  _ __ ___ 
+ | '_ \| '__/ __|
+ | |_) | | | (__ 
+ | .__/|_|  \___| Proc reader
+ |_|
+----
+Offers data lookups of files stored on `/proc`. Nearly always it retrieves struct pointers, but also data 
+types without casting them (e.g, time duration). This keeps the project minimalist, though flexible.
+
+The easiest way to install is to run:
+
+[,txt]
+----
+% go get -u ...
+----
+
+=== Example
+
+[,go]
+----
+package main
+
+import (
+    "fmt"
+    "log"
+
+    "github.com/nnzv/prc"
+)
+
+func main() {
+    age, err := prc.Uptime()
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("Uptime: %s\n", age)
+}
+----
