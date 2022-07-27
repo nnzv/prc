@@ -54,5 +54,17 @@ You need {godoc}[godoc] in order to see more examples and documentation:
 
 === Contribute
 
-Please do. Contributing is one of the most important things to enhance `prc`. So feel free to report or edit 
-related project stuff, but be respectful. 
+Please do. Contributing is one of the most important things to enhance `prc`. So feel free to report or edit related 
+project stuff, but be respectful. Note that we use Go 1.18 and https://magefile.org[mage] as automating helper.
+
+Testing, for example, can be reduced to:
+
+[,txt]
+----
+% mage test uptime
+=== RUN   TestUptime
+Uptime: 2h25m26s
+--- PASS: TestUptime (0.00s)
+PASS
+ok  	command-line-arguments	0.001s
+----
