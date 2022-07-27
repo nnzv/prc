@@ -34,6 +34,6 @@ func main() {
         log.Fatal(err)
     }
     fmt.Printf("Uptime is %s\n", age)
-    // Ouput: Uptime is 2h25m26s
+    // Output: Uptime is 2h25m26s
 }
 ----
