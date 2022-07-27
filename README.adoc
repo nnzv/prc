@@ -1,5 +1,6 @@
 :godoc: https://golang.org/x/tools/cmd/godoc
 :mage: https://magefile.org
+:port: 
 
 [,txt]
 ----
@@ -43,13 +44,11 @@ func main() {
 
 === Documentation
 
-You need {godoc}[godoc] in order to see more examples and documentation:
+The project uses {godoc}[godoc] in order to rendition examples and documentation to our importers. Running a simple though powerful http://localhost:6060/pkg/github.com/nnzv/prc[web server] can be done like so:
 
 [,sh]
 ----
-% go install golang.org/x/tools/cmd/godoc@latest
-% godoc
-# visit: http://localhost:6060/pkg/github.com/nnzv/prc
+% godoc 
 ----
 
 === Contribute
