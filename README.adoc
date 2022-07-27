@@ -1,3 +1,5 @@
+:godoc: https://golang.org/x/tools/cmd/godoc
+
 [,txt]
 ----
   _ __  _ __ ___ 
@@ -34,6 +36,17 @@ func main() {
         log.Fatal(err)
     }
     fmt.Printf("Uptime is %s\n", age)
-    // Output: Uptime is 2h25m26s
+    // Ouput: Uptime is 2h25m26s
 }
+----
+
+=== Documentation
+
+You need {godoc}[godoc] in order to see more examples and documentation:
+
+[,sh]
+----
+% go install golang.org/x/tools/cmd/godoc@latest
+% godoc
+# visit: http://localhost:6060/pkg/github.com/nnzv/prc
 ----
