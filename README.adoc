@@ -6,17 +6,16 @@
  | .__/|_|  \___| Proc reader
  |_|
 ----
-Offers data lookups of files stored on `/proc`. Nearly always it retrieves struct pointers, but also data 
-types without casting them (e.g, time duration). This keeps the project minimalist, though flexible.
-
-The easiest way to install is to run:
+Offers data lookups for files stored on `/proc`. The easiest way to install is to run:
 
 [,txt]
 ----
-% go get -u ...
+% go get -u github.com/nnzv/prc
 ----
 
 === Example
+
+Here's a trivial example that gives current uptime of the system:
 
 [,go]
 ----
@@ -34,6 +33,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    fmt.Printf("Uptime: %s\n", age)
+    fmt.Printf("Uptime is %s\n", age)
+    // Ouput: Uptime is 2h25m26s
 }
 ----
