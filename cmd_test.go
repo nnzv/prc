@@ -5,8 +5,8 @@ import (
     "testing"
 )
 
-func TestCli(t *testing.T) {
-    args, err := Cli()
+func TestCmd(t *testing.T) {
+    args, err := Cmd()
     if err != nil {
         t.Error(err)
     }

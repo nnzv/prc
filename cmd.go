@@ -5,9 +5,9 @@ import (
     "io/ioutil"
 )
 
-// Cli returns the command-line arguments passed to 
+// Cmd returns the command-line arguments passed to 
 // the Linux kernel at boot time.
-func Cli() (args []string, err error) {
+func Cmd() (args []string, err error) {
     read, err := ioutil.ReadFile("/proc/cmdline")
     if err != nil {
         return nil, err

@@ -27,8 +27,8 @@ func ExampleUptime() {
     fmt.Printf("Uptime: %1.f\n", age.Hours())
 }
 
-func ExampleCli() {
-    args, err := prc.Cli()
+func ExampleCmd() {
+    args, err := prc.Cmd()
     if err != nil {
         t.Error(err)
     }
