@@ -5,6 +5,8 @@
 |_|
 ```
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/nnzv/prc.svg)](https://pkg.go.dev/github.com/nnzv/prc)
+
 Offers data lookups for files stored on `/proc`. The easiest way to install is to run:
 
 ```sh
