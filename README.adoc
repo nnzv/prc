@@ -4,12 +4,12 @@
 
 [,txt]
 ----
-  _ __  _ __ ___ 
- | '_ \| '__/ __|
- | |_) | | | (__ 
- | .__/|_|  \___| Proc reader
- |_|
+ ___ ___ ___ 
+| . |  _|  _|
+|  _|_| |___| proc reader
+|_|
 ----
+
 Offers data lookups for files stored on `/proc`. The easiest way to install is to run:
 
 [,txt]
