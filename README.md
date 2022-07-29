@@ -5,12 +5,12 @@
 |_|
 ```
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/nnzv/prc.svg)](https://pkg.go.dev/github.com/nnzv/prc)
+[![Go Reference](https://pkg.go.dev/badge/git.sr.ht/~nzv/prc.svg)](https://pkg.go.dev/git.sr.ht/~nzv/prc)
 
 Offers data lookups for files stored on `/proc`. The easiest way to install is to run:
 
 ```sh
-% go get -u github.com/nnzv/prc
+% go get -u git.sr.ht/~nzv/prc
 ```
 
 ### Example
@@ -24,7 +24,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/nnzv/prc"
+    "git.sr.ht/~nzv/prc"
 )
 
 func main() {
@@ -51,5 +51,4 @@ Uptime: 2h25m26s
 PASS
 ok  	command-line-arguments	0.001s
 ```
-
 [mage]: https://magefile.org

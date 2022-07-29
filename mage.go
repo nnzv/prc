@@ -8,7 +8,7 @@ import (
 )
 
 func Doc() (err error) {
-    fmt.Println("visit: http://localhost:6060/pkg/github.com/nnzv/prc")
+    fmt.Println("visit: http://localhost:6060/pkg/git.sr.ht/~nzv/prc")
     cmd := exec.Command("godoc")
     cmd.Stdout = os.Stdout
     cmd.Stderr = os.Stderr

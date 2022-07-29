@@ -4,7 +4,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/nnzv/prc"
+    "git.sr.ht/~nzv/prc"
 )
 
 func ExampleMount() {
