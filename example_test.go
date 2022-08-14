@@ -12,10 +12,9 @@ func ExampleMount() {
     if err != nil {
         log.Fatal(err)
     }
-    // Iterate over device paths
     for i, p := range mnt.Path {
-        // Access device mount point by current index
-        fmt.Printf("%s mounted in %s\n", p, mnt.Point[i])
+        tpl := "%s mounted in %s\n"
+        fmt.Printf(tpl, p, mnt.Point[i])
     }
 }
 
