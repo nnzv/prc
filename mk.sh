@@ -9,7 +9,7 @@ _test() {
         echo "test what?"
         exit 1
     }
-    ${GO} test -v $1.go $1_test.go
+    ${GO} test -v $1.go $1_test.go util.go
 }
 
 _http() {
