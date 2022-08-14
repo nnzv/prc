@@ -6,7 +6,7 @@ import (
     "bufio"
 )
 
-// MountInfo holds mounted filesystems atributtes 
+// MountInfo holds mounted filesystems atributtes
 type MountInfo struct {
     Path  []string    // Device path
     Point []string    // Mount point
@@ -15,7 +15,16 @@ type MountInfo struct {
     Dummy [][]string  // Dummy values
 }
 
-func (m *MountInfo) read() (err error) {
+func Mount() (mnt *MountInfo, err error) {
+    mnt = new(MountInfo)
+    err = mnt.ReadMounts()
+    if err != nil {
+        return nil, err
+    }
+    return mnt, nil
+}
+
+func (m *MountInfo) ReadMounts() (err error) {
     f, err := os.Open("/proc/mounts")
     if err != nil {
         return err
