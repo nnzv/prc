@@ -39,16 +39,15 @@ func main() {
 
 ### Contributing
 
-Please do. Contributing is one of the most important things to enhance `prc`. So feel free to report or edit related project stuff, but be respectful. Note that we use Go 1.18 and [mage](mage) as automating helper.
+Please do. Contributing is one of the most important things to enhance `prc`. So feel free to report or edit related project stuff, but be respectful. Note that we use Go 1.18 and `mk.sh` script as automating helper.
 
 Testing, for example, can be reduced to:
 
 ```txt
-% mage test uptime
+% ./mk.sh t uptime
 === RUN   TestUptime
 Uptime: 2h25m26s
 --- PASS: TestUptime (0.00s)
 PASS
 ok  	command-line-arguments	0.001s
 ```
-[mage]: https://magefile.org
