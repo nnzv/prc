@@ -30,7 +30,7 @@ func ExampleUptime() {
 func ExampleCmd() {
     args, err := prc.Cmd()
     if err != nil {
-        t.Error(err)
+        log.Fatal(err)
     }
     fmt.Printf("%+q\n", args)
 }
