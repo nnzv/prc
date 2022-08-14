@@ -34,3 +34,14 @@ func ExampleCmd() {
     }
     fmt.Printf("%+q\n", args)
 }
+
+func ExampleNet() {
+    net, err := prc.Net()
+    if err != nil {
+        log.Fatal(err)
+    }
+    for i, f := range net.Face {
+        tpl := "%s received %d bytes\n"
+        fmt.Printf(tpl, f, net.Receive.Bytes[i])
+    }
+}
