@@ -45,3 +45,14 @@ func ExampleNet() {
         fmt.Printf(tpl, f, net.Receive.Bytes[i])
     }
 }
+
+func ExampleSwaps() {
+    swp, err := prc.Swaps()
+    if err != nil {
+        log.Fatal(err)
+    }
+    for i, f := range swp.FileName {
+        tpl := "size of %s is %d\n"
+        fmt.Printf(tpl, f, swp.Size[i])
+    }
+}
