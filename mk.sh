@@ -1,15 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # TODO: document
 
-GO=`which go`
+GO=$(which go)
+
+die() {
+    echo "$@"
+    exit 1
+}
 
 _test() {
-    test -z $1 && {
-        echo "test what?"
-        exit 1
-    }
-    ${GO} test -v $1.go $1_test.go util.go
+    test -z $1 && die 'test what?'
+    GOFLAGS=( 
+              'test' 
+                '-v' 
+             ${1}.go
+        ${1}_test.go
+    )
+    [[ $(dirname $1) = "." ]] && GOFLAGS+=( 'util.go' )
+    ${GO} ${GOFLAGS[*]}
 }
 
 _http() {
