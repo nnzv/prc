@@ -20,3 +20,5 @@ func U64(str string) (u uint64) {
     }
     return u
 }
+
+func Uint(str string) (u uint) { return uint(U64(str)) }
