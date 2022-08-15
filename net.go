@@ -3,7 +3,6 @@ package prc
 import (
     "os"
     "strings"
-    "strconv"
     "bufio"
 )
 
@@ -62,12 +61,9 @@ func (n *NetInfo) read() (err error) {
         }
         num := make([]uint64, 0, 15)
         for _, v := range txt[1:] {
-            u64, err := strconv.ParseUint(v, 10, 32)
-            if err != nil {
-                return err
-            }
-            num = append(num, u64)
+            num = append(num, U64(v))
         }
+
         n.Receive.Bytes = append(n.Receive.Bytes, num[0])
         n.Receive.Packets = append(n.Receive.Packets, num[1])
         n.Receive.Errors = append(n.Receive.Errors, num[2])
