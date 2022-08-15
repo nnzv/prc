@@ -14,7 +14,7 @@ func Atoi(str string) (i int) {
 }
 
 func U64(str string) (u uint64) {
-    u, err := strconv.ParseUint(str, 10, 32)
+    u, err := strconv.ParseUint(str, 10, 64)
     if err != nil {
         log.Fatal(err)
     }
