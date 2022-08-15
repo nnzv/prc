@@ -10,5 +10,5 @@ func TestUptime(t *testing.T) {
     if err != nil {
         t.Error(err)
     }
-    fmt.Printf("Uptime: %s\n", age)
+    fmt.Printf("Uptime: %s\n", age.Idle)
 }

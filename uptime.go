@@ -2,18 +2,31 @@ package prc
 
 import (
     "time"
-    "golang.org/x/sys/unix"
+    "strings"
+    "io/ioutil"
 )
 
-// Uptime returns uptime of the system (including time spent in suspend) and the
-// amount of time spent in the idle process. Since age is time duration, you can
-// use its type methods related.
-func Uptime() (age time.Duration, err error) {
-    var sys unix.Sysinfo_t
-    err = unix.Sysinfo(&sys)
+type UpInfo struct {
+      Up time.Duration 
+    Idle time.Duration
+}
+
+func Uptime() (age *UpInfo, err error) {
+    age = new(UpInfo)
+    err = age.read()
     if err != nil {
-        return 0, err
+        return nil, err
     }
-    age = time.Duration(sys.Uptime)
-    return age * time.Second, nil
+    return age, nil
+}
+
+func (u *UpInfo) read() (err error) {
+    f, err := ioutil.ReadFile("/proc/uptime")
+    if err != nil {
+        return err
+    }
+    age := strings.Fields(string(f))
+    u.Up = Duration(age[0]) 
+    u.Idle = Duration(age[1]) 
+    return nil
 }
