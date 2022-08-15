@@ -55,3 +55,14 @@ func ExampleSwaps() {
         fmt.Printf(tpl, f, swp.Size[i])
     }
 }
+
+func ExamplePartitions() {
+    prt, err := prc.Partitions()
+    if err != nil {
+        log.Fatal(err)
+    }
+    for i, n := range prt.Name {
+        tpl := "%s has %d blocks\n"
+        fmt.Printf(tpl, n, prt.Blocks[i])
+    }
+}
