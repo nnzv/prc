@@ -5,6 +5,7 @@ import (
     "log"
 
     "git.sr.ht/~nzv/prc"
+    "git.sr.ht/~nzv/prc/net"
 )
 
 func ExampleMount() {
@@ -34,14 +35,14 @@ func ExampleCmd() {
     fmt.Printf("%+q\n", args)
 }
 
-func ExampleNet() {
-    net, err := prc.Net()
+func ExampleDev() {
+    dev, err := net.Dev()
     if err != nil {
         log.Fatal(err)
     }
-    for i, f := range net.Face {
+    for i, f := range dev.Face {
         tpl := "%s received %d bytes\n"
-        fmt.Printf(tpl, f, net.Receive.Bytes[i])
+        fmt.Printf(tpl, f, dev.Receive.Bytes[i])
     }
 }
 
