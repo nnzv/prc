@@ -7,7 +7,7 @@ import (
 )
 
 type UpInfo struct {
-      Up time.Duration 
+    Boot time.Duration 
     Idle time.Duration
 }
 
@@ -26,7 +26,7 @@ func (u *UpInfo) read() (err error) {
         return err
     }
     age := strings.Fields(string(f))
-    u.Up = Duration(age[0]) 
+    u.Boot = Duration(age[0]) 
     u.Idle = Duration(age[1]) 
     return nil
 }

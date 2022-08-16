@@ -32,7 +32,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    fmt.Printf("Uptime is %s\n", age.Up)
+    fmt.Printf("Uptime is %s\n", age.Boot)
     // Output: Uptime is 2h25m26s
 }
 ```
