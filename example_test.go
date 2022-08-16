@@ -24,7 +24,7 @@ func ExampleUptime() {
     if err != nil {
         log.Fatal(err)
     }
-    fmt.Printf("Uptime: %s\n", age.Idle)
+    fmt.Printf("Idle: %s\n", age.Idle)
 }
 
 func ExampleCmd() {
