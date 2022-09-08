@@ -10,15 +10,15 @@ die() {
 }
 
 _test() {
-    test -z $1 && die 'test what?'
-    GOFLAGS=( 
-              'test' 
-                '-v' 
-             ${1}.go
-        ${1}_test.go
+    FILES=( 
+             "${1}.go"
+        "${1}_test.go"
     )
-    [[ $(dirname $1) = "." ]] && GOFLAGS+=( 'util.go' )
-    ${GO} ${GOFLAGS[*]}
+    test -z ${1} && FILES=()
+    if [[ $(dirname ${1}) = . ]]; then
+        FILES+=("util.go")
+    fi
+    ${GO} test -v ${FILES[*]}
 }
 
 _http() {
