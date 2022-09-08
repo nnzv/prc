@@ -4,11 +4,6 @@
 
 GO=$(which go)
 
-die() {
-    echo "$@"
-    exit 1
-}
-
 _test() {
     FILES=( 
              "${1}.go"
