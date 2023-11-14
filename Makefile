@@ -5,5 +5,8 @@
 test: check
 	go test -v -count=1 ./...
 
+site: test
+	pkgsite -open
+
 check:
 	go fmt ./...; go vet ./...
