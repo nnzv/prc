@@ -1,0 +1,13 @@
+major minor  #blocks  name
+
+   7        0     512000 loop0
+   7        1     523264 loop1
+   7        2     538112 loop2
+   7        3     552960 loop3
+   7        4     567808 loop4
+   7        5     582656 loop5
+   7        6     597504 loop6
+   7        7     612352 loop7
+ 179        0  78125000 mmcblk0
+ 179        1    1024000 mmcblk0p1
+ 179        2  77004800 mmcblk0p2
