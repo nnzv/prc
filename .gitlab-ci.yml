@@ -6,7 +6,7 @@ image: golang:latest
 
 stages:
   - check
-  - build
+  - test
 
 check:
   stage: check
@@ -14,7 +14,7 @@ check:
     - go fmt -x ./...
     - go vet ./...
 
-build:
+test:
   stage: test
   script:
     - go test -v -count=1 ./...
