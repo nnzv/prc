@@ -44,9 +44,12 @@ func Open(root, path string) (*File, error) {
 	if stat.IsDir() {
 		return nil, fmt.Errorf("proc %s: path is a directory", p)
 	}
-	if stat.Size() < 1 {
-		return nil, fmt.Errorf("proc %s: file is empty", p)
-	}
+    // BUG(nzv): Proc files don't follow the regular file rules and don't have a size.
+    // The usual size check using stat.Size() doesn't work, excluding some files.
+    // Check GitLab issue #1 for more info.
+    // if stat.Size() < 1 {
+    //    return nil, fmt.Errorf("proc %s: file is empty", p)
+    // }
 	sc := bufio.NewScanner(f)
 	if err := sc.Err(); err != nil {
 		f.Close()
