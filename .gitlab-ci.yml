@@ -11,7 +11,7 @@ stages:
 check:
   stage: check
   script:
-    - go fmt -x ./...
+    - test -z `gofmt -l ./...`
     - go vet ./...
 
 test:
