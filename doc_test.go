@@ -167,7 +167,7 @@ var knowDirs = map[string][]string{
 		"mountinfo",       // Information about mounts
 		"comm",            // Command name of the process
 		"children",        // Information about task children
-		"fdinfo/<fd>",     // Information about opened file
+		"fdinfo",          // Information about opened file
 		"map_files",       // Information about memory mapped files
 		"timerslack_ns",   // Task timerslack value
 		"patch_state",     // Livepatch patch operation state
