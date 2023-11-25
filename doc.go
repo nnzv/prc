@@ -5,5 +5,4 @@
 // Package prc implements a parser for [procfs] files.
 //
 // [procfs]: https://www.kernel.org/doc/Documentation/filesystems/proc.rst
-
 package prc
