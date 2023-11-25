@@ -8,5 +8,8 @@ test: check
 site: test
 	pkgsite -open
 
+report:
+	go test -v -count=1 -run=TestGenerateReport
+
 check:
 	go fmt ./...; go vet ./...
