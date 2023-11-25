@@ -69,45 +69,45 @@ var knowDirs = map[string][]string{
 	},
 	// Kernel data and statistics
 	"krn": []string{
-		"apm",         // Advanced power management
-		"bootconfig",  // Kernel command line and bootloader parameters
-		"buddyinfo",   // Kernel memory allocator information
-		"bus",         // Bus-specific information
-		"cmdline",     // Kernel command line
-		"cpuinfo",     // CPU information
-		"devices",     // Available devices
-		"consoles",    // Shows registered system console lines.
-		"dma",         // Used DMS channels
-		"filesystems", // Supported filesystems
-		"driver",      // Various drivers, currently rtc
-		"execdomains", // Execdomains related to security
-		"fb",          // Frame Buffer devices
-		"fs",          // File system parameters, currently nfs/exports
-		"ide",         // Info about the IDE subsystem
-		"interrupts",  // Interrupt usage
-		"iomem",       // Memory map
-		"ioports",     // I/O port usage
-		"irq",         // Masks for irq to CPU affinity
-		"isapnp",      // ISA PnP (Plug&Play)
-		"kcore",       // Kernel core image
-		"kmsg",        // Kernel messages
-		"ksyms",       // Kernel symbol table
-		"loadavg",     // Load average and process statistics
-		"locks",       // Kernel locks
-		"meminfo",     // Memory information
-		"misc",        // Miscellaneous
-		"modules",     // List of loaded modules
-		"mounts",      // Mounted filesystems
+		"apm",          // Advanced power management
+		"bootconfig",   // Kernel command line and bootloader parameters
+		"buddyinfo",    // Kernel memory allocator information
+		"bus",          // Bus-specific information
+		"cmdline",      // Kernel command line
+		"cpuinfo",      // CPU information
+		"devices",      // Available devices
+		"consoles",     // Shows registered system console lines.
+		"dma",          // Used DMS channels
+		"filesystems",  // Supported filesystems
+		"driver",       // Various drivers, currently rtc
+		"execdomains",  // Execdomains related to security
+		"fb",           // Frame Buffer devices
+		"fs",           // File system parameters, currently nfs/exports
+		"ide",          // Info about the IDE subsystem
+		"interrupts",   // Interrupt usage
+		"iomem",        // Memory map
+		"ioports",      // I/O port usage
+		"irq",          // Masks for irq to CPU affinity
+		"isapnp",       // ISA PnP (Plug&Play)
+		"kcore",        // Kernel core image
+		"kmsg",         // Kernel messages
+		"ksyms",        // Kernel symbol table
+		"loadavg",      // Load average and process statistics
+		"locks",        // Kernel locks
+		"meminfo",      // Memory information
+		"misc",         // Miscellaneous
+		"modules",      // List of loaded modules
+		"mounts",       // Mounted filesystems
 		"pagetypeinfo", // Page allocator information
 		"partitions",   // Table of partitions
 		// "pci",       // Deprecated PCI bus info (new way -> /proc/bus/pci/, decoupled by lspci)
-		"rtc", // Real-time clock
-		"slabinfo", // Slab pool info
-		"softirqs", // Softirq usage
-		"stat",     // Overall statistics
-		"swaps",    // Swap space utilization
-		"sys",      // See chapter 2
-		"sysvipc",  // SysVIPC Resources info (msg, sem, shm)
+		"rtc",         // Real-time clock
+		"slabinfo",    // Slab pool info
+		"softirqs",    // Softirq usage
+		"stat",        // Overall statistics
+		"swaps",       // Swap space utilization
+		"sys",         // See chapter 2
+		"sysvipc",     // SysVIPC Resources info (msg, sem, shm)
 		"uptime",      // Wall clock since boot, combined idle time of all CPUs
 		"version",     // Kernel version
 		"video",       // bttv info of video resources
