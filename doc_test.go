@@ -60,15 +60,15 @@ func pct(x, y int) float64 { return (float64(x) * float64(y)) / 100.0 }
 // where the documentation is absent or ambiguous regarding a specific file, a default main file will be used.
 var knowDirs = map[string][]string{
 	// Ext4 File System Parameters
-	"ext4": []string{
+	"ext4": {
 		"mb_groups", // Details of multiblock allocator buddy cache of free blocks
 	},
 	// IDE Devices
-	"ide": []string{
+	"ide": {
 		"main",
 	},
 	// Kernel data and statistics
-	"krn": []string{
+	"krn": {
 		"apm",          // Advanced power management
 		"bootconfig",   // Kernel command line and bootloader parameters
 		"buddyinfo",    // Kernel memory allocator information
@@ -114,7 +114,7 @@ var knowDirs = map[string][]string{
 		"vmallocinfo", // Show vmalloced areas
 	},
 	// Networking info
-	"net": []string{
+	"net": {
 		"arp",           // Kernel ARP table
 		"dev",           // Network devices with statistics
 		"dev_mcast",     // Layer2 multicast groups a device is listening
@@ -151,14 +151,14 @@ var knowDirs = map[string][]string{
 		"snmp6",         // SNMP data (IPv6)
 	},
 	// Parallel port info
-	"parport": []string{
+	"parport": {
 		"autoprobe", // IEEE-1284 device ID information
 		"devices",   // List of device drivers using the port. '+' indicates the current user
 		"hardware",  // Parallel port's base address, IRQ line, and DMA channel
 		"irq",       // IRQ that parport is using for that port. Can be modified by writing a new value
 	},
 	// Per-Process parameters
-	"ps": []string{
+	"ps": {
 		"oom_adj",         // Adjust the oom-killer score
 		"oom_score_adj",   // Adjust the oom-killer score
 		"oom_score",       // Display current oom-killer score
@@ -175,7 +175,7 @@ var knowDirs = map[string][]string{
 		"fd",              // List of symlinks to open files
 	},
 	// Process-Specific subdirectories
-	"psd": []string{
+	"psd": {
 		"clear_refs",   // Clears page referenced bits shown in smaps output
 		"cmdline",      // Command line arguments
 		"cpu",          // Current and last CPU in which it was executed
@@ -197,15 +197,15 @@ var knowDirs = map[string][]string{
 		"numa_maps",    // An extension based on maps, showing the memory locality
 	},
 	// SCSI info
-	"scsi": []string{
+	"scsi": {
 		"main",
 	},
 	// Modifying system parameters
-	"sys": []string{
+	"sys": {
 		"main",
 	},
 	// TTY info
-	"tty": []string{
+	"tty": {
 		"drivers",       // List of drivers and their usage
 		"ldiscs",        // Registered line disciplines
 		"driver_serial", // Usage statistics and status of single tty lines

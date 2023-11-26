@@ -23,7 +23,7 @@ func TestStat(t *testing.T) {
 			desc: "ok stat",
 			want: &Stat{
 				CPU: map[string]CPUStat{
-					"cpu": CPUStat{
+					"cpu": {
 						User:      123,
 						Nice:      456,
 						System:    789,
@@ -35,7 +35,7 @@ func TestStat(t *testing.T) {
 						Guest:     0,
 						GuestNice: 0,
 					},
-					"cpu0": CPUStat{
+					"cpu0": {
 						User:      23,
 						Nice:      45,
 						System:    67,
@@ -47,7 +47,7 @@ func TestStat(t *testing.T) {
 						Guest:     0,
 						GuestNice: 0,
 					},
-					"cpu1": CPUStat{
+					"cpu1": {
 						User:      100,
 						Nice:      200,
 						System:    300,
