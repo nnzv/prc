@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // Default paths for the "/proc" and "/proc/sys" directories. These paths are simple raw strings,
@@ -60,6 +61,10 @@ func (f *File) Close() error { return f.File.Close() }
 
 // SplitWords configures the scanner to split words using [bufio.ScanWords].
 func (f *File) SplitWords() { f.Scanner.Split(bufio.ScanWords) }
+
+// ScanFields scans the current line of the file, splitting it into fields using whitespace.
+// Returns a slice of strings representing the fields.
+func (f *File) ScanFields() []string { return strings.Fields(f.Scanner.Text()) }
 
 // ParseError represents a parsing error, including the field name, file path, and the encountered error.
 type ParseError struct {

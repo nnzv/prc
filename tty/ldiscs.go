@@ -4,11 +4,7 @@
 
 package tty
 
-import (
-	"strings"
-
-	"gitlab.com/nzv/prc"
-)
+import "gitlab.com/nzv/prc"
 
 type Ldisc struct {
 	Name   string // Ldisc name
@@ -26,7 +22,7 @@ func Ldiscs() ([]Ldisc, error) {
 
 	for f.Scanner.Scan() {
 
-		fields := strings.Fields(f.Scanner.Text())
+		fields := f.ScanFields()
 
 		var l Ldisc
 

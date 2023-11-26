@@ -51,7 +51,7 @@ func Stats() (*Stat, error) {
 
 		var vals []uint64
 
-		fields := strings.Fields(f.Scanner.Text())
+		fields := f.ScanFields()
 
 		for _, x := range fields[1:] { // skip row columns
 			v, err := prc.ParseUint64(x, 10, 64)

@@ -5,7 +5,6 @@
 package krn
 
 import (
-	"strings"
 	"time"
 
 	"gitlab.com/nzv/prc"
@@ -20,7 +19,7 @@ func Uptime() (time.Duration, time.Duration, error) {
 
 	f.Scanner.Scan()
 
-	fields := strings.Fields(f.Scanner.Text())
+	fields := f.ScanFields()
 
 	boot, err := prc.ParseDuration(fields[0])
 	if err != nil {

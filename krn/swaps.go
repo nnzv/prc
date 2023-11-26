@@ -4,11 +4,7 @@
 
 package krn
 
-import (
-	"strings"
-
-	"gitlab.com/nzv/prc"
-)
+import "gitlab.com/nzv/prc"
 
 type Swap struct {
 	Filename string // Swap space name or device
@@ -31,7 +27,7 @@ func Swaps() ([]Swap, error) {
 
 	for f.Scanner.Scan() {
 
-		fields := strings.Fields(f.Scanner.Text())
+		fields := f.ScanFields()
 
 		var s Swap
 
