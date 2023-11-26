@@ -14,7 +14,7 @@ report:
 	go test -v -count=1 -run=TestGenerateReport
 
 fmt:
-	gofmt -w .
+	gofmt -w -s .
 
 check:
 	test -z "$(shell gofmt -l .)"
