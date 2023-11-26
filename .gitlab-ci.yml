@@ -10,21 +10,22 @@ before_script:
 
 # https://go.dev/doc/devel/release#policy
 stages:
-  - test-1.20
-  - test-1.21
-  - test-latest
+  - test
 
-test-1.20:
+go-test 1/3:
+  stage: test
   image: docker.io/library/golang:1.20-alpine
   script:
     - make test
 
-test-1.21:
+go-test 2/3:
+  stage: test
   image: docker.io/library/golang:1.21-alpine
   script:
     - make test
 
-test-latest:
+go-test 3/3:
+  stage: test
   image: docker.io/library/golang:alpine
   script:
     - make test
