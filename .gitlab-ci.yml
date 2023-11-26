@@ -11,9 +11,9 @@ before_script:
   - rm -f go.mod
   - go mod init gitlab.com/nzv/prc
 
-# https://go.dev/doc/devel/release#policy
 stages:
   - go-check
+  # https://go.dev/doc/devel/release#policy
   - test
 
 go-check:
