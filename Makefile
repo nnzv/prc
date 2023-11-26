@@ -17,5 +17,5 @@ fmt:
 	gofmt -w -s .
 
 check:
-	test -z "$(shell gofmt -l .)"
+	test -z $(shell gofmt -l .)
 	go vet ./$(DIR)
