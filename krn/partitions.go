@@ -4,11 +4,7 @@
 
 package krn
 
-import (
-	"strings"
-
-	"gitlab.com/nzv/prc"
-)
+import "gitlab.com/nzv/prc"
 
 type Partition struct {
 	Major  uint64 // Major number of the partition.
@@ -30,7 +26,7 @@ func Partitions() ([]Partition, error) {
 
 	for f.Scanner.Scan() {
 
-		fields := strings.Fields(f.Scanner.Text())
+		fields := f.ScanFields()
 
 		if len(fields) != 4 {
 			continue // skip invalid fields

@@ -4,11 +4,7 @@
 
 package krn
 
-import (
-	"strings"
-
-	"gitlab.com/nzv/prc"
-)
+import "gitlab.com/nzv/prc"
 
 func Cmdline() ([]string, error) {
 	f, err := prc.Open(prc.ProcPath, "cmdline")
@@ -17,5 +13,5 @@ func Cmdline() ([]string, error) {
 	}
 	defer f.Close()
 	f.Scanner.Scan() // first line only
-	return strings.Fields(f.Scanner.Text()), nil
+	return f.ScanFields(), nil
 }
