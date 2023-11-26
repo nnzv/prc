@@ -19,6 +19,7 @@ stages:
 go-check:
   script:
     - go run golang.org/x/vuln/cmd/govulncheck@latest
+    # golang.org/issues/24230
     - test -z $(gofmt -l .)
     - go vet ./...
 
