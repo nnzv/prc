@@ -6,6 +6,7 @@ default:
   image: docker.io/library/golang:alpine
 
 before_script:
+  - go version
   # golang.org/issues/61888
   - rm -f go.mod
   - go mod init gitlab.com/nzv/prc
