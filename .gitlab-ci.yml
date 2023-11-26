@@ -2,6 +2,9 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
+default:
+  image: docker.io/library/golang:alpine
+
 before_script:
   # golang.org/issues/61888
   - rm -f go.mod
@@ -13,7 +16,6 @@ stages:
   - test
 
 go-check:
-  image: docker.io/library/golang:alpine
   script:
     - test -z $(gofmt -l .)
     - go vet ./...
@@ -32,6 +34,5 @@ go-test 2/3:
 
 go-test 3/3:
   stage: test
-  image: docker.io/library/golang:alpine
   script:
     - go test ./...
