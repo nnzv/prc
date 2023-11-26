@@ -13,5 +13,9 @@ site: test
 report:
 	go test -v -count=1 -run=TestGenerateReport
 
+fmt:
+	gofmt -w .
+
 check:
-	go fmt ./$(DIR); go vet ./$(DIR)
+	test -z "$(shell gofmt -l .)"
+	go vet ./$(DIR)
