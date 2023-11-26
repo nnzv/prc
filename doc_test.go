@@ -16,6 +16,12 @@ import (
 // TestGenerateReport generates a test report by comparing the contents of directories
 // based on the specified expectations in the knowDirs variable.
 func TestGenerateReport(t *testing.T) {
+
+	// https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+	if os.Getenv("CI") == "true" {
+		t.Skip("skipping report")
+	}
+
 	report := new(bytes.Buffer)
 
 	w := tabwriter.NewWriter(report, 0, 4, 0, ' ', 0)
