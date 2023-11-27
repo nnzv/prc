@@ -15,6 +15,7 @@ stages:
   - go-check
   # https://go.dev/doc/devel/release#policy
   - test
+  - report
 
 go-check:
   script:
@@ -39,3 +40,13 @@ go-test 3/3:
   stage: test
   script:
     - go test ./...
+
+do-report:
+  stage: report
+  script:
+    - apk add --no-cache git
+    - go test -run=TestGenerateReport
+    - git config --global user.name  "prc-reporter"
+    - git config --global user.email "no-reply@gitlab.com"
+    - git commit --add --message "cicd: run gotest 'TestGenerateReport'"
+    - git push https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git
