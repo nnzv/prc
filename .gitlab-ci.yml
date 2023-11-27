@@ -51,4 +51,4 @@ do-report:
       git config --global user.email "no-reply@gitlab.com"
       git add REPORT
       git commit --message "cicd: run gotest 'TestGenerateReport'"
-      git push https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git
+      git push -o ci.skip https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git main
