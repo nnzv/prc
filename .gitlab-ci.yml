@@ -52,4 +52,4 @@ do-report:
       git remote add ci-origin https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git
       git add REPORT
       git commit --message "cicd: run gotest 'TestGenerateReport'"
-      git push -o ci.skip ci-origin main
+      git push -o ci.skip ci-origin HEAD:main
