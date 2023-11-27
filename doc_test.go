@@ -11,6 +11,7 @@ import (
 	"strings"
 	"testing"
 	"text/tabwriter"
+	"time"
 )
 
 // TestGenerateReport generates a test report by comparing the contents of directories
@@ -49,7 +50,8 @@ func TestGenerateReport(t *testing.T) {
 		fmt.Fprintf(w, "%s \t%d\t%d\t%.2f%%\n", dir, cnt, got, pct(got, cnt))
 		aw, ag = cnt+aw, got+ag
 	}
-	fmt.Fprintf(w, "\t \t\t\t-----\n\t \t\t\t%.2f%%\n", pct(ag, aw))
+	now := time.Now().Format(time.RFC3339)
+	fmt.Fprintf(w, "\t \t\t\t-----\n\t \t\t\t%.2f%% [%s]\n", pct(ag, aw), now)
 	w.Flush()
 	t.Logf("\n%s", report)
 }
