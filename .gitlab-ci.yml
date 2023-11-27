@@ -53,3 +53,6 @@ do-report:
       git add REPORT.csv
       git commit --message "ci: automated report generation (${CI_JOB_ID})"
       git push -o ci.skip ci-origin HEAD:main
+  artifacts:
+    paths:
+      - REPORT.csv
