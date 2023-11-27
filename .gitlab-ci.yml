@@ -49,6 +49,7 @@ do-report:
       go test -run=TestGenerateReport
       git config --global user.name  "prc-reporter"
       git config --global user.email "no-reply@gitlab.com"
+      git remote add origin https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git
       git add REPORT
       git commit --message "cicd: run gotest 'TestGenerateReport'"
-      git push -o ci.skip https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git main
+      git push -o ci.skip origin main
