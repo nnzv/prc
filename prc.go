@@ -21,9 +21,9 @@ var (
 
 // File represents an already open file, ready for scanning its content.
 type File struct {
-	Path           string // Absolute path (mostly used for errors)
-	*os.File              // File handle
-	*bufio.Scanner        // Scanner for reading the file
+	Path string         // Absolute path (mostly used for errors)
+	f    *os.File       // File handle
+	s    *bufio.Scanner // Scanner for reading the file
 }
 
 // Open combines root and path to open a file, typically using [ProcPath] or [SysPath] as root.
@@ -57,17 +57,17 @@ func Open(root, path string) (*File, error) {
 }
 
 // Close closes the /proc file by closing its file handle.
-func (f *File) Close() error { return f.File.Close() }
+func (f *File) Close() error { return f.f.Close() }
 
 // Scan scans the /proc file by uing its [bufio.Scanner] handle.
-func (f *File) Scan() bool { return f.Scanner.Scan() }
+func (f *File) Scan() bool { return f.s.Scan() }
 
 // SplitWords configures the scanner to split words using [bufio.ScanWords].
-func (f *File) SplitWords() { f.Scanner.Split(bufio.ScanWords) }
+func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
 
 // ScanFields scans the current line of the file, splitting it into fields using whitespace.
 // Returns a slice of strings representing the fields.
-func (f *File) ScanFields() []string { return strings.Fields(f.Scanner.Text()) }
+func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
 
 // ParseError represents a parsing error, including the field name, file path, and the encountered error.
 type ParseError struct {
