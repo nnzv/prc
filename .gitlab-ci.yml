@@ -44,15 +44,7 @@ go-test 3/3:
 do-report:
   stage: report
   script:
-    - |
-      apk add --no-cache git
-      go test -run=TestGenerateReport
-      git config --global user.name  "prc-bot"
-      git config --global user.email "no-reply@gitlab.com"
-      git remote add ci-origin https://oauth2:${CI_REPORTER_TOKEN}@gitlab.com/nzv/prc.git
-      git add REPORT.csv
-      git commit --message "ci: automated report generation (${CI_JOB_ID})"
-      git push -o ci.skip ci-origin HEAD:main
+    - go test -run=TestGenerateReport
   artifacts:
     paths:
       - REPORT.csv
