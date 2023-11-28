@@ -17,7 +17,7 @@ func Uptime() (time.Duration, time.Duration, error) {
 	}
 	defer f.Close()
 
-	f.Scanner.Scan()
+	f.Scan()
 
 	fields := f.ScanFields()
 

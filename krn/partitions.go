@@ -20,11 +20,11 @@ func Partitions() ([]Partition, error) {
 	}
 	defer f.Close()
 
-	f.Scanner.Scan() // skip headers
+	f.Scan() // skip headers
 
 	var data []Partition
 
-	for f.Scanner.Scan() {
+	for f.Scan() {
 
 		fields := f.ScanFields()
 

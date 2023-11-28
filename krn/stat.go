@@ -47,7 +47,7 @@ func Stats() (*Stat, error) {
 		SoftIRQ: make([]uint64, 0),
 	}
 
-	for f.Scanner.Scan() {
+	for f.Scan() {
 
 		var vals []uint64
 

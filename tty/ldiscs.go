@@ -20,7 +20,7 @@ func Ldiscs() ([]Ldisc, error) {
 
 	var data []Ldisc
 
-	for f.Scanner.Scan() {
+	for f.Scan() {
 
 		fields := f.ScanFields()
 
