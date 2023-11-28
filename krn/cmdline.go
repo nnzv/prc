@@ -12,6 +12,6 @@ func Cmdline() ([]string, error) {
 		return nil, err
 	}
 	defer f.Close()
-	f.Scanner.Scan() // first line only
+	f.Scan() // first line only
 	return f.ScanFields(), nil
 }

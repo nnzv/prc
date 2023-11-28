@@ -59,6 +59,9 @@ func Open(root, path string) (*File, error) {
 // Close closes the /proc file by closing its file handle.
 func (f *File) Close() error { return f.File.Close() }
 
+// Scan scans the /proc file by uing its [bufio.Scanner] handle.
+func (f *File) Scan() bool { return f.Scanner.Scan() }
+
 // SplitWords configures the scanner to split words using [bufio.ScanWords].
 func (f *File) SplitWords() { f.Scanner.Split(bufio.ScanWords) }
 

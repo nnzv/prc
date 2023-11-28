@@ -21,11 +21,11 @@ func Swaps() ([]Swap, error) {
 	}
 	defer f.Close()
 
-	f.Scanner.Scan() // skip headers
+	f.Scan() // skip headers
 
 	var data []Swap
 
-	for f.Scanner.Scan() {
+	for f.Scan() {
 
 		fields := f.ScanFields()
 
