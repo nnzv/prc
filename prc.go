@@ -56,7 +56,7 @@ func Open(root, path string) (*File, error) {
 	return &File{p, f, sc}, nil
 }
 
-// Close closes the /proc file by closing its file handle.
+// Close closes the /proc file by closing its [os.File] handle.
 func (f *File) Close() error { return f.f.Close() }
 
 // Scan scans the /proc file by uing its [bufio.Scanner] handle.
