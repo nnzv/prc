@@ -7,7 +7,8 @@ default:
 
 .test_rules:
   rules:
-    - changes: "**/*.go"
+    - changes: 
+      - "**/*.go"
 
 before_script:
   - go version
