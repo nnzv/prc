@@ -23,23 +23,31 @@ go-check:
     # golang.org/issues/24230
     - test -z $(gofmt -l .)
     - go vet ./...
+  rules:
+    - changes: "**/*.go"
 
 go-test 1/3:
   stage: test
   image: docker.io/library/golang:1.20-alpine
   script:
     - go test ./...
+  rules:
+    - changes: "**/*.go"
 
 go-test 2/3:
   stage: test
   image: docker.io/library/golang:1.21-alpine
   script:
     - go test ./...
+  rules:
+    - changes: "**/*.go"
 
 go-test 3/3:
   stage: test
   script:
     - go test ./...
+  rules:
+    - changes: "**/*.go"
 
 do-report:
   stage: report
