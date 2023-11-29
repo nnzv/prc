@@ -5,6 +5,10 @@
 default:
   image: docker.io/library/golang:alpine
 
+.test_rules:
+  rules:
+    - changes: "**/*.go"
+
 before_script:
   - go version
   # golang.org/issues/61888
@@ -24,7 +28,7 @@ go-check:
     - test -z $(gofmt -l .)
     - go vet ./...
   rules:
-    - changes: "**/*.go"
+    - !reference [.test_rules, rules]
 
 go-test 1/3:
   stage: test
@@ -32,7 +36,7 @@ go-test 1/3:
   script:
     - go test ./...
   rules:
-    - changes: "**/*.go"
+    - !reference [.test_rules, rules]
 
 go-test 2/3:
   stage: test
@@ -40,14 +44,14 @@ go-test 2/3:
   script:
     - go test ./...
   rules:
-    - changes: "**/*.go"
+    - !reference [.test_rules, rules]
 
 go-test 3/3:
   stage: test
   script:
     - go test ./...
   rules:
-    - changes: "**/*.go"
+    - !reference [.test_rules, rules]
 
 do-report:
   stage: report
