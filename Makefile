@@ -3,8 +3,10 @@
 # license that can be found in the LICENSE file.
 
 DIR=...
+
+all: fmt check test 
  
-test: check
+test:
 	go test -v -count=1 ./$(DIR)
 
 site: test
