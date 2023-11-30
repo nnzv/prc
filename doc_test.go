@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 	"testing"
-	"text/tabwriter"
 )
 
 // TestGenerateReport generates a test report by comparing the contents of directories
@@ -24,9 +23,7 @@ func TestGenerateReport(t *testing.T) {
 
 	report := new(bytes.Buffer)
 
-	w := tabwriter.NewWriter(report, 0, 4, 0, ' ', 0)
-
-	fmt.Fprintln(w, "DIR,WANT,GOT,DID")
+	fmt.Fprintln(report, "DIR,WANT,GOT,DID")
 
 	var aw, ag int // Initialize total counts.
 
@@ -46,11 +43,10 @@ func TestGenerateReport(t *testing.T) {
 			}
 		}
 		cnt := len(want) // Total expected files in the directory.
-		fmt.Fprintf(w, "%s,%d,%d,%.2f%%\n", dir, cnt, got, pct(got, cnt))
+		fmt.Fprintf(report, "%s,%d,%d,%.2f%%\n", dir, cnt, got, pct(got, cnt))
 		aw, ag = cnt+aw, got+ag
 	}
-	fmt.Fprintf(w, ",,,%.2f%%", pct(ag, aw))
-	w.Flush()
+	fmt.Fprintf(report, ",,,%.2f%%", pct(ag, aw))
 
 	if err := os.WriteFile("REPORT.csv", report.Bytes(), 0666); err != nil {
 		t.Fatal(err)
