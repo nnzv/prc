@@ -77,7 +77,7 @@ var knowDirs = map[string][]string{
 		"main",
 	},
 	// Kernel data and statistics
-	"krn": {
+	"kernel": {
 		"apm",          // Advanced power management
 		"bootconfig",   // Kernel command line and bootloader parameters
 		"buddyinfo",    // Kernel memory allocator information

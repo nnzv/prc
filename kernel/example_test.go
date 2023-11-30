@@ -2,17 +2,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package krn_test
+package kernel_test
 
 import (
 	"fmt"
 	"os"
 
-	"gitlab.com/nzv/prc/krn"
+	"gitlab.com/nzv/prc/kernel"
 )
 
 func ExampleUptime() {
-	boot, idle, err := krn.Uptime()
+	boot, idle, err := kernel.Uptime()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
@@ -21,7 +21,7 @@ func ExampleUptime() {
 }
 
 func ExamplePartitions() {
-	parts, err := krn.Partitions()
+	parts, err := kernel.Partitions()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
@@ -32,7 +32,7 @@ func ExamplePartitions() {
 }
 
 func ExampleStats() {
-	stats, err := krn.Stats()
+	stats, err := kernel.Stats()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
@@ -41,7 +41,7 @@ func ExampleStats() {
 }
 
 func ExampleCmdline() {
-	cmdline, err := krn.Cmdline()
+	cmdline, err := kernel.Cmdline()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
@@ -50,7 +50,7 @@ func ExampleCmdline() {
 }
 
 func ExampleSwaps() {
-	swaps, err := krn.Swaps()
+	swaps, err := kernel.Swaps()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
