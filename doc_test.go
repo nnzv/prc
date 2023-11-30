@@ -166,8 +166,8 @@ var knowDirs = map[string][]string{
 		"hardware",  // Parallel port's base address, IRQ line, and DMA channel
 		"irq",       // IRQ that parport is using for that port. Can be modified by writing a new value
 	},
-	// Per-Process parameters
-	"ps": {
+	"pid": {
+		// Per-Process parameters
 		"oom_adj",         // Adjust the oom-killer score
 		"oom_score_adj",   // Adjust the oom-killer score
 		"oom_score",       // Display current oom-killer score
@@ -182,9 +182,7 @@ var knowDirs = map[string][]string{
 		"patch_state",     // Livepatch patch operation state
 		"arch_status",     // Task architecture specific information
 		"fd",              // List of symlinks to open files
-	},
-	// Process-Specific subdirectories
-	"psd": {
+		// Process-Specific subdirectories
 		"clear_refs",   // Clears page referenced bits shown in smaps output
 		"cmdline",      // Command line arguments
 		"cpu",          // Current and last CPU in which it was executed
