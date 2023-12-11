@@ -19,21 +19,29 @@ func TestOpen(t *testing.T) {
 		desc     string
 		filename string
 		path     string
+		err      string
 	}{
 		{
 			desc:     "ok file",
 			filename: "file",
 			path:     filepath.Join(prc.ProcPath, "file"),
+			err:      "",
+		},
+		{
+			desc:     "nok file (empty)",
+			filename: "empty",
+			path:     "",
+			err:      "proc testdata/empty: file is empty",
 		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
 			f, err := prc.Open(prc.ProcPath, tc.filename)
-			if err != nil {
-				t.Error(err)
+			if err != nil && err.Error() != tc.err {
+				t.Fatal(err)
 			}
-			if f.Path != tc.path {
+			if f != nil && f.Path != tc.path {
 				t.Errorf("mismatch proc path: got %v, want %v", f.Path, tc.path)
 			}
 		})
