@@ -43,8 +43,8 @@ func Open(root, path string) (*File, error) {
 	if stat.IsDir() {
 		return nil, fmt.Errorf("proc %s: path is a directory", p)
 	}
-    // TODO(nzv): Although checking if the file is empty using io.ReadAll is effective,
-    // consider optimizing by using io.TeeReader to avoid opening the same file twice.
+	// TODO(nzv): Although checking if the file is empty using io.ReadAll is effective,
+	// consider optimizing by using io.TeeReader to avoid opening the same file twice.
 	tmp, err := os.Open(p)
 	if err != nil {
 		return nil, err
