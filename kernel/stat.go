@@ -35,7 +35,7 @@ type CPUStat struct {
 }
 
 func Stats() (*Stat, error) {
-	f, err := prc.Open(prc.ProcPath, "stat")
+	f, err := prc.Open(prc.Root, "stat")
 	if err != nil {
 		return nil, err
 	}

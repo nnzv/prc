@@ -7,7 +7,7 @@ package kernel
 import "gitlab.com/nzv/prc"
 
 func Cmdline() ([]string, error) {
-	f, err := prc.Open(prc.ProcPath, "cmdline")
+	f, err := prc.Open(prc.Root, "cmdline")
 	if err != nil {
 		return nil, err
 	}

@@ -14,7 +14,7 @@ type Partition struct {
 }
 
 func Partitions() ([]Partition, error) {
-	f, err := prc.Open(prc.ProcPath, "partitions")
+	f, err := prc.Open(prc.Root, "partitions")
 	if err != nil {
 		return nil, err
 	}

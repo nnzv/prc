@@ -13,7 +13,7 @@ import (
 
 func TestOpen(t *testing.T) {
 
-	prc.ProcPath = "testdata"
+	prc.Root = "testdata"
 
 	tests := []struct {
 		desc     string
@@ -24,7 +24,7 @@ func TestOpen(t *testing.T) {
 		{
 			desc:     "ok file",
 			filename: "file",
-			path:     filepath.Join(prc.ProcPath, "file"),
+			path:     filepath.Join(prc.Root, "file"),
 			err:      "",
 		},
 		{
@@ -37,7 +37,7 @@ func TestOpen(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			f, err := prc.Open(prc.ProcPath, tc.filename)
+			f, err := prc.Open(prc.Root, tc.filename)
 			if err != nil && err.Error() != tc.err {
 				t.Fatal(err)
 			}
