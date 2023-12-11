@@ -3,4 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Per-Process parameters and Process-Specific subdirectories
+
+//go:build linux
+
 package pid

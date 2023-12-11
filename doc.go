@@ -5,4 +5,7 @@
 // Package prc implements a parser for [procfs] files.
 //
 // [procfs]: https://www.kernel.org/doc/Documentation/filesystems/proc.rst
+
+//go:build linux
+
 package prc

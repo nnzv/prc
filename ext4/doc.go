@@ -3,4 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Ext4 File System Parameters
+
+//go:build linux
+
 package ext4

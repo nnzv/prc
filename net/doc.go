@@ -3,4 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Networking info
+
+//go:build linux
+
 package net

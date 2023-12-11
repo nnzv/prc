@@ -3,4 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Modifying system parameters
+
+//go:build linux
+
 package sys
