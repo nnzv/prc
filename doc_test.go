@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"path"
 	"strings"
 	"testing"
 )
@@ -23,57 +24,42 @@ func TestGenerateReport(t *testing.T) {
 
 	report := new(bytes.Buffer)
 
-	fmt.Fprintln(report, "DIR,WANT,GOT,DID")
-
-	var aw, ag int // Initialize total counts.
-
+	fmt.Fprintln(report, "PATH,DONE")
 	for dir, want := range knowDirs {
-		entry, err := os.ReadDir(dir)
+		d := path.Base(dir)
+		if d == "/" {
+			dir, d = "", "kernel"
+		}
+		entry, err := os.ReadDir(d)
 		if err != nil {
 			t.Fatal(err)
 		}
-		var got int
 		for _, e := range entry {
 			if !strings.HasSuffix(e.Name(), "_test.go") || !e.IsDir() {
 				for _, f := range want {
-					if e.Name() == f+".go" {
-						got++
-					}
+					fmt.Fprintf(report, "%s/%s,%t\n", dir, f, e.Name() == f+".go")
 				}
 			}
 		}
-		cnt := len(want) // Total expected files in the directory.
-		fmt.Fprintf(report, "%s,%d,%d,%.2f%%\n", dir, cnt, got, pct(got, cnt))
-		aw, ag = cnt+aw, got+ag
 	}
-	fmt.Fprintf(report, ",,,%.2f%%", pct(ag, aw))
 
 	if err := os.WriteFile("REPORT.csv", report.Bytes(), 0666); err != nil {
 		t.Fatal(err)
 	}
 }
 
-// pct calculates the percentage of x in relation to y. It returns the result as a float64.
-func pct(x, y int) float64 { return (float64(x) * float64(y)) / 100.0 }
-
-// knowDirs represents the current directories mirroring the proc filesystem. It functions as a reference
-// for tracking the project's objectives and generating a report on the current state of development. Each
-// key represents a directory within the project, and its corresponding value is a slice of files expected
-// to be present in those directories.
-//
-// The filenames in the slice correspond to those specified in the official procfs documentation. In cases
-// where the documentation is absent or ambiguous regarding a specific file, a default main file will be used.
+// TODO(nzv): doc
 var knowDirs = map[string][]string{
 	// Ext4 File System Parameters
-	"ext4": {
+	"/fs/ext4": {
 		"mb_groups", // Details of multiblock allocator buddy cache of free blocks
 	},
 	// IDE Devices
-	"ide": {
+	"/ide": {
 		"main",
 	},
 	// Kernel data and statistics
-	"kernel": {
+	"/": {
 		"apm",          // Advanced power management
 		"bootconfig",   // Kernel command line and bootloader parameters
 		"buddyinfo",    // Kernel memory allocator information
@@ -119,7 +105,7 @@ var knowDirs = map[string][]string{
 		"vmallocinfo", // Show vmalloced areas
 	},
 	// Networking info
-	"net": {
+	"/net": {
 		"arp",           // Kernel ARP table
 		"dev",           // Network devices with statistics
 		"dev_mcast",     // Layer2 multicast groups a device is listening
@@ -156,13 +142,13 @@ var knowDirs = map[string][]string{
 		"snmp6",         // SNMP data (IPv6)
 	},
 	// Parallel port info
-	"parport": {
+	"/parport": {
 		"autoprobe", // IEEE-1284 device ID information
 		"devices",   // List of device drivers using the port. '+' indicates the current user
 		"hardware",  // Parallel port's base address, IRQ line, and DMA channel
 		"irq",       // IRQ that parport is using for that port. Can be modified by writing a new value
 	},
-	"pid": {
+	"/pid": {
 		// Per-Process parameters
 		"oom_adj",         // Adjust the oom-killer score
 		"oom_score_adj",   // Adjust the oom-killer score
@@ -200,15 +186,15 @@ var knowDirs = map[string][]string{
 		"numa_maps",    // An extension based on maps, showing the memory locality
 	},
 	// SCSI info
-	"scsi": {
+	"/scsi": {
 		"main",
 	},
 	// Modifying system parameters
-	"sys": {
+	"/sys": {
 		"main",
 	},
 	// TTY info
-	"tty": {
+	"/tty": {
 		"drivers",       // List of drivers and their usage
 		"ldiscs",        // Registered line disciplines
 		"driver_serial", // Usage statistics and status of single tty lines
