@@ -3,4 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Kernel data and statistics
+
+//go:build linux
+
 package kernel
