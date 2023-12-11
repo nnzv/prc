@@ -15,7 +15,7 @@ type Swap struct {
 }
 
 func Swaps() ([]Swap, error) {
-	f, err := prc.Open(prc.ProcPath, "swaps")
+	f, err := prc.Open(prc.Root, "swaps")
 	if err != nil {
 		return nil, err
 	}

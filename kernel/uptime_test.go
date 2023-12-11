@@ -13,7 +13,7 @@ import (
 
 func TestUptime(t *testing.T) {
 
-	prc.ProcPath = "testdata"
+	prc.Root = "testdata"
 
 	tests := []struct {
 		desc string

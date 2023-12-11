@@ -15,7 +15,7 @@ import (
 
 // Default path for the "/proc" directory. This path is a simple raw string,
 // and no checks, such as whether it is mounted, are performed on it.
-var ProcPath = "/proc"
+var Root = "/proc"
 
 // File represents an already open file, ready for scanning its content.
 type File struct {
@@ -24,7 +24,7 @@ type File struct {
 	s    *bufio.Scanner // Scanner for reading the file
 }
 
-// Open combines root and path to open a file, typically using [ProcPath].
+// Open combines root and path to open a file, typically using [Root].
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
 func Open(root, path string) (*File, error) {
