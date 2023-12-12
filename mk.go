@@ -16,11 +16,10 @@ import (
 )
 
 var out bytes.Buffer
-var dir, target string // flags
+var dir string // flags
 
 func init() {
 	flag.StringVar(&dir, "dir", "./...", "specify the directory for Go commands")
-	flag.StringVar(&target, "target", "test", "specify the make target")
 	flag.Usage = func() {
 		log.Println("usage of mk: ")
 		flag.PrintDefaults()
@@ -34,7 +33,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	switch target {
+	switch flag.Arg(0) {
 	case "test":
 		run("go", "test", "-v", "-count=1", dir)
 	case "site":
@@ -50,7 +49,7 @@ func main() {
 		}
 		run("go", "vet", dir)
 	default:
-		log.Fatalf("mk: unknown target %#v\n", target)
+		log.Fatalf("mk: unknown target %#v\n", flag.Arg(0))
 	}
 }
 
