@@ -34,7 +34,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	switch strings.TrimSpace(flag.Arg(0)) {
+	t := strings.TrimSpace(flag.Arg(0))
+	switch t {
 	case "test", "":
 		run("go", "test", "-v", "-count=1", dir)
 	case "site":
@@ -50,7 +51,7 @@ func main() {
 		}
 		run("go", "vet", dir)
 	default:
-		log.Fatalf("mk: unknown target %#v\n", flag.Arg(0))
+		log.Fatalf("mk: unknown target %#v\n", t)
 	}
 }
 
