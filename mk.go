@@ -13,6 +13,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 )
 
 var out bytes.Buffer
@@ -33,8 +34,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	switch flag.Arg(0) {
-	case "test":
+	switch strings.TrimSpace(flag.Arg(0)) {
+	case "test", "":
 		run("go", "test", "-v", "-count=1", dir)
 	case "site":
 		run("pkgsite", "-open")
