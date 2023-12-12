@@ -22,7 +22,7 @@ func init() {
 	flag.StringVar(&dir, "dir", "./...", "specify the directory for Go commands")
 	flag.StringVar(&target, "target", "test", "specify the make target")
 	flag.Usage = func() {
-		log.Println("usage of make: ")
+		log.Println("usage of mk: ")
 		flag.PrintDefaults()
 	}
 	log.SetFlags(0)
@@ -50,7 +50,7 @@ func main() {
 		}
 		run("go", "vet", dir)
 	default:
-		log.Fatalf("make: unknown target %#v\n", target)
+		log.Fatalf("mk: unknown target %#v\n", target)
 	}
 }
 
@@ -60,7 +60,7 @@ func run(cmd string, args ...string) {
 	c.Stdout = &out
 	c.Stderr = os.Stderr
 	if err := c.Run(); err != nil {
-		log.Fatalf("make: %s", err)
+		log.Fatalf("mk: %s", err)
 	}
 	if out.Len() > 0 {
 		log.Print(&out)
