@@ -2,6 +2,18 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Simple mk(1) in Go. The Go team doesn't provide a standard tool for
+// tasks like GNU Make, so prc minimizes dependencies, even for a single
+// target system.
+//
+// Usage:
+//
+//   go run mk.go <target> <flags>
+//
+// You can also create an alias to avoid typing each time:
+//
+//   alias mk="go run mk.go"
+
 //go:build ignore
 
 package main
