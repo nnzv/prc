@@ -50,8 +50,7 @@ func Open(path string) (*File, error) {
 		return nil, &ProcError{Op: "open", Path: p, Err: ErrPathIsDir}
 	}
 	buf := new(bytes.Buffer) // file writer
-	tee := io.TeeReader(f, buf)
-	bts, err := io.ReadAll(tee)
+	bts, err := io.ReadAll(io.TeeReader(f, buf))
 	if err != nil {
 		return nil, err
 	}
