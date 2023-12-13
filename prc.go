@@ -44,7 +44,7 @@ func Open(path string) (*File, error) {
 	}
 	stat, err := f.Stat()
 	if err != nil {
-		return nil, &ProcError{Op: "open", Path: "", Err: err} // [fs.PathError] includes the path information.
+		return nil, &ProcError{Op: "open", Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
 		return nil, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
