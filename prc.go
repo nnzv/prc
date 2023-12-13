@@ -57,12 +57,12 @@ func Open(path string) (*File, error) {
 	if len(bts) < 1 {
 		return nil, &ProcError{Op: "open", Path: p, Err: ErrFileIsEmpty}
 	}
-	sc := bufio.NewScanner(buf)
-	if err := sc.Err(); err != nil {
+	s := bufio.NewScanner(buf)
+	if err := s.Err(); err != nil {
 		f.Close()
 		return nil, &ProcError{Op: "scan", Path: p, Err: err}
 	}
-	return &File{p, f, sc}, nil
+	return &File{p, f, s}, nil
 }
 
 // Close closes the /proc file by closing its [os.File] handle.
