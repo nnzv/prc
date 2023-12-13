@@ -44,10 +44,10 @@ func Open(path string) (*File, error) {
 	}
 	stat, err := f.Stat()
 	if err != nil {
-		return nil, fmt.Errorf("proc %q", err) // [fs.PathError] includes the path information.
+		return nil, fmt.Errorf("proc %s", err) // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
-		return nil, fmt.Errorf("proc %s: %q", p, ErrPathIsDir)
+		return nil, fmt.Errorf("proc %s: %s", p, ErrPathIsDir)
 	}
 	buf := new(bytes.Buffer) // file writer
 	tee := io.TeeReader(f, buf)
@@ -56,12 +56,12 @@ func Open(path string) (*File, error) {
 		return nil, err
 	}
 	if len(bts) < 1 {
-		return nil, fmt.Errorf("proc %s: %q", p, ErrFileIsEmpty)
+		return nil, fmt.Errorf("proc %s: %s", p, ErrFileIsEmpty)
 	}
 	sc := bufio.NewScanner(buf)
 	if err := sc.Err(); err != nil {
 		f.Close()
-		return nil, fmt.Errorf("proc %s: %q", p, err)
+		return nil, fmt.Errorf("proc %s: %s", p, err)
 	}
 	return &File{p, f, sc}, nil
 }
