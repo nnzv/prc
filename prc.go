@@ -9,11 +9,17 @@ package prc
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
+)
+
+var (
+	ErrFileIsEmpty = errors.New("file is empty")
+	ErrPathIsDir   = errors.New("path is a directory")
 )
 
 // Default path for the "/proc" directory. This path is a simple raw string,
@@ -41,7 +47,7 @@ func Open(path string) (*File, error) {
 		return nil, fmt.Errorf("proc %q", err) // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
-		return nil, fmt.Errorf("proc %s: path is a directory", p)
+		return nil, fmt.Errorf("proc %s: %q", p, ErrPathIsDir)
 	}
 	buf := new(bytes.Buffer) // file writer
 	tee := io.TeeReader(f, buf)
@@ -50,7 +56,7 @@ func Open(path string) (*File, error) {
 		return nil, err
 	}
 	if len(bts) < 1 {
-		return nil, fmt.Errorf("proc %s: file is empty", p)
+		return nil, fmt.Errorf("proc %s: %q", p, ErrFileIsEmpty)
 	}
 	sc := bufio.NewScanner(buf)
 	if err := sc.Err(); err != nil {
