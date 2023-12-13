@@ -87,7 +87,7 @@ type ParseError struct {
 
 // Error formats the error message.
 func (e *ParseError) Error() string {
-	return fmt.Sprintf("proc parse %s (%s): %s", e.Field, e.Path, e.Err)
+	return fmt.Sprintf("proc parse %s (%s): %s", e.Path, e.Field, e.Err)
 }
 
 // ProcError represents an internal operation error
