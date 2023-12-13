@@ -94,7 +94,7 @@ func (e *ParseError) Error() string {
 // ProcError represents an internal operation error
 type ProcError struct {
 	Op   string // Operator causing the error
-	Path string // File path associated with the error
+	Path string // File path associated with the error (optional)
 	Err  error  // Error details
 }
 
