@@ -79,7 +79,7 @@ func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
 // Returns a slice of strings representing the fields.
 func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
 
-// ParseError represents a parsing error, including the field name, file path, and the encountered error.
+// ParseError represents a parsing error
 type ParseError struct {
 	Path  string // File path causing the parsing error
 	Field string // Field name causing the parsing error
@@ -91,7 +91,7 @@ func (e *ParseError) Error() string {
 	return fmt.Sprintf("parsing %s in %s: %q", e.Field, e.Path, e.Err)
 }
 
-// ProcError represents an internal operation error with details on the operator, file path, and error details
+// ProcError represents an internal operation error
 type ProcError struct {
 	Op   string // Operator causing the error
 	Path string // File path associated with the error
