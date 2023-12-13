@@ -14,7 +14,7 @@ type Ldisc struct {
 }
 
 func Ldiscs() ([]Ldisc, error) {
-	f, err := prc.Open(prc.Root, "tty/ldiscs")
+	f, err := prc.Open("tty/ldiscs")
 	if err != nil {
 		return nil, err
 	}
