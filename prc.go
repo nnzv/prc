@@ -91,7 +91,7 @@ func (e *ParseError) Error() string {
 	return fmt.Sprintf("parsing %s in %s: %q", e.Field, e.Path, e.Err)
 }
 
-// ProcError represents an internal operation error with details on the operator, file path, and parsing error.
+// ProcError represents an internal operation error with details on the operator, file path, and error details
 type ProcError struct {
 	Op   string // Operator causing the error
 	Path string // File path associated with the error
