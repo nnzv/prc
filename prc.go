@@ -21,7 +21,7 @@ var Root = "/proc"
 
 // File represents an already open file, ready for scanning its content.
 type File struct {
-	Path string         // Filepath (mostly used for errors)
+	Path string         // Combined [Root] and proc filepath (mostly used for errors)
 	f    *os.File       // File handle
 	s    *bufio.Scanner // Scanner for reading the file
 }
