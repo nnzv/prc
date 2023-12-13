@@ -44,10 +44,10 @@ func Open(path string) (*File, error) {
 	}
 	stat, err := f.Stat()
 	if err != nil {
-		return nil, fmt.Errorf("proc %s", err) // [fs.PathError] includes the path information.
+		return nil, &ProcError{Op: "open", Path: "", Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
-		return nil, fmt.Errorf("proc %s: %s", p, ErrPathIsDir)
+		return nil, &ProcError{Op: "open", Path: p, Err: ErrPathIsDir}
 	}
 	buf := new(bytes.Buffer) // file writer
 	tee := io.TeeReader(f, buf)
@@ -56,12 +56,12 @@ func Open(path string) (*File, error) {
 		return nil, err
 	}
 	if len(bts) < 1 {
-		return nil, fmt.Errorf("proc %s: %s", p, ErrFileIsEmpty)
+		return nil, &ProcError{Op: "open", Path: p, Err: ErrFileIsEmpty}
 	}
 	sc := bufio.NewScanner(buf)
 	if err := sc.Err(); err != nil {
 		f.Close()
-		return nil, fmt.Errorf("proc %s: %s", p, err)
+		return nil, &ProcError{Op: "open", Path: p, Err: err}
 	}
 	return &File{p, f, sc}, nil
 }
@@ -89,4 +89,22 @@ type ParseError struct {
 // Error formats the error message.
 func (e *ParseError) Error() string {
 	return fmt.Sprintf("parsing %s in %s: %q", e.Field, e.Path, e.Err)
+}
+
+// ProcError represents an internal operation error with details on the operator, file path, and parsing error.
+type ProcError struct {
+	Op   string // Operator causing the error
+	Path string // File path associated with the error
+	Err  error  // Error details
+}
+
+// Error formats the error message.
+func (e *ProcError) Error() string {
+	var b strings.Builder
+	b.WriteString("proc %s")
+	if e.Path != "" {
+		b.WriteString(" %s")
+	}
+	b.WriteString(": %s")
+	return fmt.Sprintf(b.String(), e.Op, e.Path, e.Err)
 }

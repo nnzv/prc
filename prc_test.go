@@ -33,7 +33,7 @@ func TestOpen(t *testing.T) {
 			desc:     "nok file (empty)",
 			filename: "empty",
 			path:     "",
-			err:      "proc testdata/empty: file is empty",
+			err:      "proc open testdata/empty: file is empty",
 		},
 	}
 
