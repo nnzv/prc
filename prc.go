@@ -8,6 +8,7 @@ package prc
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -42,20 +43,16 @@ func Open(path string) (*File, error) {
 	if stat.IsDir() {
 		return nil, fmt.Errorf("proc %s: path is a directory", p)
 	}
-	// TODO(nzv): Although checking if the file is empty using io.ReadAll is effective,
-	// consider optimizing by using io.TeeReader to avoid opening the same file twice.
-	tmp, err := os.Open(p)
-	if err != nil {
-		return nil, err
-	}
-	bts, err := io.ReadAll(tmp)
+	buf := new(bytes.Buffer) // file writer
+	tee := io.TeeReader(f, buf)
+	bts, err := io.ReadAll(tee)
 	if err != nil {
 		return nil, err
 	}
 	if len(bts) < 1 {
 		return nil, fmt.Errorf("proc %s: file is empty", p)
 	}
-	sc := bufio.NewScanner(f)
+	sc := bufio.NewScanner(buf)
 	if err := sc.Err(); err != nil {
 		f.Close()
 		return nil, fmt.Errorf("proc %s: %q", p, err)
