@@ -26,11 +26,11 @@ type File struct {
 	s    *bufio.Scanner // Scanner for reading the file
 }
 
-// Open combines root and path to open a file, typically using [Root].
+// Open opens a proc file located at the specified path, with the root directory defined by the [Root] variable.
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
-func Open(root, path string) (*File, error) {
-	p := filepath.Join(root, path)
+func Open(path string) (*File, error) {
+	p := filepath.Join(Root, path)
 	f, err := os.Open(p)
 	if err != nil {
 		return nil, err

@@ -13,7 +13,7 @@ import (
 )
 
 func Uptime() (time.Duration, time.Duration, error) {
-	f, err := prc.Open(prc.Root, "uptime")
+	f, err := prc.Open("uptime")
 	if err != nil {
 		return 0, 0, err
 	}

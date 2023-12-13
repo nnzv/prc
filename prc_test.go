@@ -39,7 +39,7 @@ func TestOpen(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			f, err := prc.Open(prc.Root, tc.filename)
+			f, err := prc.Open(tc.filename)
 			if err != nil && err.Error() != tc.err {
 				t.Fatal(err)
 			}
