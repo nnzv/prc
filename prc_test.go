@@ -35,6 +35,12 @@ func TestOpen(t *testing.T) {
 			path:     "",
 			err:      "proc open testdata/empty: file is empty",
 		},
+		{
+			desc:     "nok path (type dir)",
+			filename: "dir",
+			path:     "",
+			err:      "proc open testdata/dir: path is a directory",
+		},
 	}
 
 	for _, tc := range tests {
