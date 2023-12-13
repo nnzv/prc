@@ -37,8 +37,8 @@ type File struct {
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
 func Open(path string) (*File, error) {
-	p := filepath.Join(Root, path)
-	f, err := os.Open(p)
+	path = filepath.Join(Root, path)
+	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func Open(path string) (*File, error) {
 		return nil, &ProcError{Op: "open", Path: "", Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
-		return nil, &ProcError{Op: "open", Path: p, Err: ErrPathIsDir}
+		return nil, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
 	}
 	buf := new(bytes.Buffer) // file writer
 	bts, err := io.ReadAll(io.TeeReader(f, buf))
@@ -55,14 +55,14 @@ func Open(path string) (*File, error) {
 		return nil, err
 	}
 	if len(bts) < 1 {
-		return nil, &ProcError{Op: "open", Path: p, Err: ErrFileIsEmpty}
+		return nil, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
 	}
 	s := bufio.NewScanner(buf)
 	if err := s.Err(); err != nil {
 		f.Close()
-		return nil, &ProcError{Op: "scan", Path: p, Err: err}
+		return nil, &ProcError{Op: "scan", Path: path, Err: err}
 	}
-	return &File{p, f, s}, nil
+	return &File{path, f, s}, nil
 }
 
 // Close closes the /proc file by closing its [os.File] handle.
