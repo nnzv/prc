@@ -33,6 +33,19 @@ type File struct {
 	s    *bufio.Scanner // Scanner for reading the file
 }
 
+// Close closes the /proc file by closing its [os.File] handle.
+func (f *File) Close() error { return f.f.Close() }
+
+// Scan scans the /proc file by uing its [bufio.Scanner] handle.
+func (f *File) Scan() bool { return f.s.Scan() }
+
+// SplitWords configures the scanner to split words using [bufio.ScanWords].
+func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
+
+// ScanFields scans the current line of the file, splitting it into fields using whitespace.
+// Returns a slice of strings representing the fields.
+func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
+
 // Open opens a proc file located at the specified path, with the root directory defined by the [Root] variable.
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
@@ -64,19 +77,6 @@ func Open(path string) (File, error) {
 	}
 	return File{path, f, s}, nil
 }
-
-// Close closes the /proc file by closing its [os.File] handle.
-func (f *File) Close() error { return f.f.Close() }
-
-// Scan scans the /proc file by uing its [bufio.Scanner] handle.
-func (f *File) Scan() bool { return f.s.Scan() }
-
-// SplitWords configures the scanner to split words using [bufio.ScanWords].
-func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
-
-// ScanFields scans the current line of the file, splitting it into fields using whitespace.
-// Returns a slice of strings representing the fields.
-func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
 
 // ParseError represents a parsing error
 type ParseError struct {
