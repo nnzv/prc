@@ -36,33 +36,33 @@ type File struct {
 // Open opens a proc file located at the specified path, with the root directory defined by the [Root] variable.
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
-func Open(path string) (*File, error) {
+func Open(path string) (File, error) {
 	path = filepath.Join(Root, path)
 	f, err := os.Open(path)
 	if err != nil {
-		return nil, err
+		return File{}, err
 	}
 	stat, err := f.Stat()
 	if err != nil {
-		return nil, &ProcError{Op: "open", Err: err} // [fs.PathError] includes the path information.
+		return File{}, &ProcError{Op: "open", Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
-		return nil, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
+		return File{}, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
 	}
 	buf := new(bytes.Buffer) // file writer
 	bts, err := io.ReadAll(io.TeeReader(f, buf))
 	if err != nil {
-		return nil, err
+		return File{}, err
 	}
 	if len(bts) < 1 {
-		return nil, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
+		return File{}, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
 	}
 	s := bufio.NewScanner(buf)
 	if err := s.Err(); err != nil {
 		f.Close()
-		return nil, &ProcError{Op: "scan", Path: path, Err: err}
+		return File{}, &ProcError{Op: "scan", Path: path, Err: err}
 	}
-	return &File{path, f, s}, nil
+	return File{path, f, s}, nil
 }
 
 // Close closes the /proc file by closing its [os.File] handle.
