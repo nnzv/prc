@@ -78,18 +78,6 @@ func Open(path string) (File, error) {
 	return File{path, f, s}, nil
 }
 
-// ParseError represents a parsing error
-type ParseError struct {
-	Path  string // File path causing the parsing error
-	Field string // Field name causing the parsing error
-	Err   error  // Parsing error details
-}
-
-// Error formats the error message.
-func (e *ParseError) Error() string {
-	return fmt.Sprintf("proc parse %s (%s): %s", e.Path, e.Field, e.Err)
-}
-
 // ProcError represents an internal operation error
 type ProcError struct {
 	Op   string // Operator causing the error

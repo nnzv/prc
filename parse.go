@@ -7,6 +7,7 @@
 package prc
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -51,4 +52,16 @@ func ParseUint64(from string, base int, bitSize int) (uint64, error) {
 		return 0, err
 	}
 	return to, nil
+}
+
+// ParseError represents a parsing error
+type ParseError struct {
+	Path  string // File path causing the parsing error
+	Field string // Field name causing the parsing error
+	Err   error  // Parsing error details
+}
+
+// Error formats the error message.
+func (e *ParseError) Error() string {
+	return fmt.Sprintf("proc parse %s (%s): %s", e.Path, e.Field, e.Err)
 }
