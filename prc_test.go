@@ -49,7 +49,7 @@ func TestOpen(t *testing.T) {
 			if err != nil && err.Error() != tc.err {
 				t.Fatal(err)
 			}
-			if f != nil && f.Path != tc.path {
+			if f.Path != tc.path {
 				t.Errorf("mismatch proc path: got %v, want %v", f.Path, tc.path)
 			}
 		})
