@@ -76,7 +76,6 @@ func Open(path string) (File, error) {
 	}
 	s := bufio.NewScanner(buf)
 	if err := s.Err(); err != nil {
-		f.Close()
 		return File{}, &ProcError{Op: "scan", Path: path, Err: err}
 	}
 	return File{path, f, s}, nil
