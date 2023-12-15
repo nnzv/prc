@@ -15,6 +15,7 @@ type Partition struct {
 	Name   string // Name of the partition.
 }
 
+// Partitions returns known system partitions.
 func Partitions() ([]Partition, error) {
 	f, err := prc.Open("partitions")
 	if err != nil {
