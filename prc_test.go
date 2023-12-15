@@ -7,7 +7,6 @@
 package prc_test
 
 import (
-	"path/filepath"
 	"testing"
 
 	"gitlab.com/nzv/prc"
@@ -15,36 +14,46 @@ import (
 
 func TestOpen(t *testing.T) {
 
-	prc.Root = "testdata"
-
 	tests := []struct {
 		desc     string
 		filename string
 		path     string
+		root     string
 		err      string
 	}{
 		{
 			desc:     "ok file",
 			filename: "file",
-			path:     filepath.Join(prc.Root, "file"),
+			path:     "testdata/file",
+			root:     "testdata",
 			err:      "",
 		},
 		{
 			desc:     "nok file (empty)",
 			filename: "empty",
 			path:     "",
+			root:     "testdata",
 			err:      "proc open testdata/empty: file is empty",
 		},
 		{
 			desc:     "nok path (type dir)",
 			filename: "dir",
 			path:     "",
+			root:     "testdata",
 			err:      "proc open testdata/dir: path is a directory",
+		},
+		{
+			desc:     "nok root (empty root)",
+			filename: "file",
+			path:     "",
+			root:     "",
+			err:      "proc open: empty root path",
 		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
+			prc.Root = tc.root
 			f, err := prc.Open(tc.filename)
 			if err != nil && err.Error() != tc.err {
 				t.Fatal(err)
