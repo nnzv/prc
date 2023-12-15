@@ -10,5 +10,5 @@ Package `prc` implements a parser for [procfs][0] files.
 
 For guides and reference materials about `prc`, see [the documentation][1].
 
-[0]: https://www.kernel.org/doc/Documentation/filesystems/proc.rst
+[0]: http://www.kernel.org/pub/linux/docs/man-pages/book/man-pages-6.05.01.pdf#proc_5
 [1]: https://pkg.go.dev/gitlab.com/nzv/prc
