@@ -2,10 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package prc implements a parser for [procfs] files.
-//
-// [procfs]: https://www.kernel.org/doc/Documentation/filesystems/proc.rst
-
 //go:build linux
 
+// Package prc implements a parser for [procfs] files.
+//
+// [procfs]: http://www.kernel.org/pub/linux/docs/man-pages/book/man-pages-6.05.01.pdf#proc_5
 package prc
