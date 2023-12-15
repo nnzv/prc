@@ -87,11 +87,8 @@ type ProcError struct {
 
 // Error formats the error message.
 func (e *ProcError) Error() string {
-	var b strings.Builder
-	b.WriteString("proc %s")
 	if e.Path != "" {
-		b.WriteString(" %s")
+		return fmt.Sprintf("proc %s %s: %s", e.Op, e.Path, e.Err)
 	}
-	b.WriteString(": %s")
-	return fmt.Sprintf(b.String(), e.Op, e.Path, e.Err)
+	return fmt.Sprintf("proc %s: %s", e.Op, e.Err)
 }
