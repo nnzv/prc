@@ -20,6 +20,7 @@ import (
 var (
 	ErrFileIsEmpty = errors.New("file is empty")
 	ErrPathIsDir   = errors.New("path is a directory")
+	ErrEmptyRoot   = errors.New("empty root path")
 )
 
 // Default path for the "/proc" directory. This path is a simple raw string,
@@ -50,6 +51,9 @@ func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
 // It checks for errors and validates file properties, returning a [File] struct with the file path
 // and a [bufio.Scanner] for reading its content upon success.
 func Open(path string) (File, error) {
+	if Root == "" {
+		return File{}, &ProcError{Op: "open", Err: ErrEmptyRoot}
+	}
 	path = filepath.Join(Root, path)
 	f, err := os.Open(path)
 	if err != nil {
