@@ -65,7 +65,7 @@ func Open(path string) (File, error) {
 	buf := new(bytes.Buffer) // file writer
 	bts, err := io.ReadAll(io.TeeReader(f, buf))
 	if err != nil {
-		return File{}, err
+		return File{}, &ProcError{Op: "open", Path: path, Err: err}
 	}
 	if len(bts) < 1 {
 		return File{}, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
