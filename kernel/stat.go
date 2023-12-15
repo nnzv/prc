@@ -36,6 +36,7 @@ type CPUStat struct {
 	GuestNice uint64 // Niced guest CPU time
 }
 
+// Stats returns architecture-dependent kernel/system statistics.
 func Stats() (*Stat, error) {
 	f, err := prc.Open("stat")
 	if err != nil {

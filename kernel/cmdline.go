@@ -8,6 +8,7 @@ package kernel
 
 import "gitlab.com/nzv/prc"
 
+// Cmdline returns Linux kernel boot arguments.
 func Cmdline() ([]string, error) {
 	f, err := prc.Open("cmdline")
 	if err != nil {

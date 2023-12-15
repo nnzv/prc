@@ -16,6 +16,7 @@ type Swap struct {
 	Priority int64  // Priority (higher values indicate higher priority)
 }
 
+// Swaps returns swaps areas in use
 func Swaps() ([]Swap, error) {
 	f, err := prc.Open("swaps")
 	if err != nil {

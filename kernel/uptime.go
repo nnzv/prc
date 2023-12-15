@@ -12,6 +12,7 @@ import (
 	"gitlab.com/nzv/prc"
 )
 
+// Uptime returns system uptime and idle time.
 func Uptime() (time.Duration, time.Duration, error) {
 	f, err := prc.Open("uptime")
 	if err != nil {
