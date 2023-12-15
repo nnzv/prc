@@ -55,16 +55,16 @@ func Open(path string) (File, error) {
 		return File{}, &ProcError{Op: "open", Err: ErrEmptyRoot}
 	}
 	path = filepath.Join(Root, path)
-	f, err := os.Open(path)
-	if err != nil {
-		return File{}, err
-	}
-	stat, err := f.Stat()
+	stat, err := os.Stat(path)
 	if err != nil {
 		return File{}, &ProcError{Op: "open", Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
 		return File{}, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
+	}
+	f, err := os.Open(path)
+	if err != nil {
+		return File{}, err
 	}
 	buf := new(bytes.Buffer) // file writer
 	bts, err := io.ReadAll(io.TeeReader(f, buf))
