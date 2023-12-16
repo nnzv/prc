@@ -50,9 +50,13 @@ func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
 // Returns a slice of strings representing the fields.
 func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
 
-// Open opens a proc file located at the specified path, with the root directory defined by the [Root] variable.
-// It checks for errors and validates file properties, returning a [File] struct with the file path
-// and a [bufio.Scanner] for reading its content upon success.
+// Open opens a proc file specified by the given path and returns a [File] and an error, if any.
+// In the presence of any error, the returned file will be an empty instance of [File]. It
+// returns [ErrEmptyRoot] if the global variable [Root] is empty. The full path is constructed by
+// joining [Root] and the provided path. The function checks if the path exists and is not a directory;
+// otherwise, it returns [ErrPathIsDir]. Since proc files lack a true size, the function reads the
+// file bytes directly instead of using the "Size" method of [io/fs.FileInfo]. If the content is less
+// than 1 byte, returns [ErrFileIsEmpty].
 func Open(path string) (File, error) {
 	if Root == "" {
 		return File{}, &ProcError{Op: "open", Err: ErrEmptyRoot}
