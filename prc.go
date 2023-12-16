@@ -57,7 +57,7 @@ func Open(path string) (File, error) {
 	path = filepath.Join(Root, path)
 	stat, err := os.Stat(path)
 	if err != nil {
-		return File{}, &ProcError{Op: "open", Err: err} // [fs.PathError] includes the path information.
+		return File{}, &ProcError{Err: err} // [fs.PathError] includes the path information.
 	}
 	if stat.IsDir() {
 		return File{}, &ProcError{Op: "open", Path: path, Err: ErrPathIsDir}
@@ -83,13 +83,16 @@ func Open(path string) (File, error) {
 
 // ProcError represents an internal operation error
 type ProcError struct {
-	Op   string // Operator causing the error
+	Op   string // Operator causing the error (optional)
 	Path string // File path associated with the error (optional)
 	Err  error  // Error details
 }
 
 // Error formats the error message.
 func (e *ProcError) Error() string {
+	if e.Op == "" && e.Path == "" {
+		return fmt.Sprintf("proc %s", e.Err)
+	}
 	if e.Path != "" {
 		return fmt.Sprintf("proc %s %s: %s", e.Op, e.Path, e.Err)
 	}
