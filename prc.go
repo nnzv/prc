@@ -23,8 +23,11 @@ var (
 	ErrEmptyRoot   = errors.New("empty root path")
 )
 
-// Default path for the "/proc" directory. This path is a simple raw string,
-// and no checks, such as whether it is mounted, are performed on it.
+// Root is the default path for the "/proc" directory. It is a basic raw string
+// that represents the root path without undergoing additional checks, such as
+// whether it is mounted. The [Open] function relies on this variable as the root
+// path for constructing the proc filepath. If the variable is found to be empty,
+// attempting to use it will result in raising an [ErrEmptyRoot] error.
 var Root = "/proc"
 
 // File represents an already open file, ready for scanning its content.
