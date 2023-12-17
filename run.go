@@ -8,11 +8,11 @@
 //
 // Usage:
 //
-//   go run mk.go <target> <flags>
+//   go run run.go <target> <flags>
 //
 // You can also create an alias to avoid typing each time:
 //
-//   alias mk="go run mk.go"
+//   alias run="go run run.go"
 
 //go:build ignore
 
@@ -34,7 +34,7 @@ var dir string // flags
 func init() {
 	flag.StringVar(&dir, "dir", "./...", "specify the directory for Go commands")
 	flag.Usage = func() {
-		log.Println("usage of mk: ")
+		log.Println("usage of run: ")
 		flag.PrintDefaults()
 	}
 	log.SetFlags(0)
@@ -63,7 +63,7 @@ func main() {
 		}
 		run("go", "vet", dir)
 	default:
-		log.Fatalf("mk: unknown target %#v\n", t)
+		log.Fatalf("run: unknown target %#v\n", t)
 	}
 }
 
@@ -73,7 +73,7 @@ func run(cmd string, args ...string) {
 	c.Stdout = &out
 	c.Stderr = os.Stderr
 	if err := c.Run(); err != nil {
-		log.Fatalf("mk: %s", err)
+		log.Fatalf("run: %s", err)
 	}
 	if out.Len() > 0 {
 		log.Print(&out)
