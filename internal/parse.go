@@ -4,11 +4,12 @@
 
 //go:build linux
 
-package prc
+package internal
 
 import (
 	"fmt"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -52,6 +53,10 @@ func ParseUint64(from string, base int, bitSize int) (uint64, error) {
 		return 0, err
 	}
 	return to, nil
+}
+
+func ParseCommaList(from string) []string {
+	return strings.Split(from, ",")
 }
 
 // ParseError represents a parsing error

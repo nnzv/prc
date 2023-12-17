@@ -6,7 +6,7 @@
 
 package tty
 
-import "gitlab.com/nzv/prc"
+import "gitlab.com/nzv/prc/internal"
 
 type Ldisc struct {
 	Name   string // Ldisc name
@@ -14,7 +14,7 @@ type Ldisc struct {
 }
 
 func Ldiscs() ([]Ldisc, error) {
-	f, err := prc.Open("tty/ldiscs")
+	f, err := internal.Open("tty/ldiscs")
 	if err != nil {
 		return nil, err
 	}
@@ -30,9 +30,9 @@ func Ldiscs() ([]Ldisc, error) {
 
 		l.Name = fields[0]
 
-		l.Number, err = prc.ParseUint64(fields[1], 10, 64)
+		l.Number, err = internal.ParseUint64(fields[1], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "number", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "number", Err: err}
 		}
 
 		data = append(data, l)

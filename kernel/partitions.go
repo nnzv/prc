@@ -6,7 +6,7 @@
 
 package kernel
 
-import "gitlab.com/nzv/prc"
+import "gitlab.com/nzv/prc/internal"
 
 type Partition struct {
 	Major  uint64 // Major number of the partition.
@@ -17,7 +17,7 @@ type Partition struct {
 
 // Partitions returns known system partitions.
 func Partitions() ([]Partition, error) {
-	f, err := prc.Open("partitions")
+	f, err := internal.Open("partitions")
 	if err != nil {
 		return nil, err
 	}
@@ -37,19 +37,19 @@ func Partitions() ([]Partition, error) {
 
 		var p Partition
 
-		p.Major, err = prc.ParseUint64(fields[0], 10, 64)
+		p.Major, err = internal.ParseUint64(fields[0], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "major", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "major", Err: err}
 		}
 
-		p.Minor, err = prc.ParseUint64(fields[1], 10, 64)
+		p.Minor, err = internal.ParseUint64(fields[1], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "minor", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "minor", Err: err}
 		}
 
-		p.Blocks, err = prc.ParseUint64(fields[2], 10, 64)
+		p.Blocks, err = internal.ParseUint64(fields[2], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "blocks", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "blocks", Err: err}
 		}
 
 		p.Name = fields[3]
