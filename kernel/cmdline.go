@@ -6,11 +6,11 @@
 
 package kernel
 
-import "gitlab.com/nzv/prc"
+import "gitlab.com/nzv/prc/internal"
 
 // Cmdline returns Linux kernel boot arguments.
 func Cmdline() ([]string, error) {
-	f, err := prc.Open("cmdline")
+	f, err := internal.Open("cmdline")
 	if err != nil {
 		return nil, err
 	}

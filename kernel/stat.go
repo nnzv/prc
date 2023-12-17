@@ -9,7 +9,7 @@ package kernel
 import (
 	"strings"
 
-	"gitlab.com/nzv/prc"
+	"gitlab.com/nzv/prc/internal"
 )
 
 type Stat struct {
@@ -38,7 +38,7 @@ type CPUStat struct {
 
 // Stats returns architecture-dependent kernel/system statistics.
 func Stats() (*Stat, error) {
-	f, err := prc.Open("stat")
+	f, err := internal.Open("stat")
 	if err != nil {
 		return nil, err
 	}
@@ -57,9 +57,9 @@ func Stats() (*Stat, error) {
 		fields := f.ScanFields()
 
 		for _, x := range fields[1:] { // skip row columns
-			v, err := prc.ParseUint64(x, 10, 64)
+			v, err := internal.ParseUint64(x, 10, 64)
 			if err != nil {
-				return nil, &prc.ParseError{Path: f.Path, Field: fields[0], Err: err}
+				return nil, &internal.ParseError{Path: f.Path, Field: fields[0], Err: err}
 			}
 			vals = append(vals, v)
 		}

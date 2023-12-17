@@ -6,7 +6,7 @@
 
 package kernel
 
-import "gitlab.com/nzv/prc"
+import "gitlab.com/nzv/prc/internal"
 
 type Swap struct {
 	Filename string // Swap space name or device
@@ -18,7 +18,7 @@ type Swap struct {
 
 // Swaps returns swaps areas in use
 func Swaps() ([]Swap, error) {
-	f, err := prc.Open("swaps")
+	f, err := internal.Open("swaps")
 	if err != nil {
 		return nil, err
 	}
@@ -37,19 +37,19 @@ func Swaps() ([]Swap, error) {
 		s.Filename = fields[0]
 		s.Type = fields[1]
 
-		s.Size, err = prc.ParseUint64(fields[2], 10, 64)
+		s.Size, err = internal.ParseUint64(fields[2], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "size", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "size", Err: err}
 		}
 
-		s.Used, err = prc.ParseUint64(fields[3], 10, 64)
+		s.Used, err = internal.ParseUint64(fields[3], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "used", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "used", Err: err}
 		}
 
-		s.Priority, err = prc.ParseInt(fields[4], 10, 64)
+		s.Priority, err = internal.ParseInt(fields[4], 10, 64)
 		if err != nil {
-			return nil, &prc.ParseError{Path: f.Path, Field: "priority", Err: err}
+			return nil, &internal.ParseError{Path: f.Path, Field: "priority", Err: err}
 		}
 
 		data = append(data, s)
