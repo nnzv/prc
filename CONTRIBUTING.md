@@ -18,6 +18,25 @@ related to a feature or change, CC the responsible developers if known. This inc
 them reviewing and commenting. If you're uncertain about the developers, consult the git logs for the 
 necessary information.
 
+# Check and Test
+
+When modifying Go code in the project, use the tests and checks in the build system, facilitated by the simple tool `run.go`.
+
+1. To make things easier, you can use this alias:
+
+       alias run="go run run.go"
+
+2. Before testing, check your changes using the "run.go" script with the "check" target. This 
+   checks for any issues in your code and ensures it follows the rules.
+
+       vi kernel/uptime.go  # Make your changes
+       run check
+
+3. If everything is okay, run tests to be sure. This makes sure 
+   your changes don't break anything. 
+
+       run test
+
 [GitLab]: https://gitlab.com/nzv/prc
 [GitHub]: https://gitlab.com/nnzv/prc
 [proc(5) man page]: https://www.kernel.org/doc/man-pages/online/pages/man5/proc.5.html
