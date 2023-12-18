@@ -1,37 +1,25 @@
-# Contribute to "prc"
+# Contribute
 
-Welcome to our open-source project! Your contributions are valued. Keep in mind that we rely exclusively on the 
-official [procfs documentation][0] at kernel.org and the [proc(5)][1] man page. When contributing, ~~stick to these 
-sources strictly~~. Avoid using information from other places.
+We talk about the project, fix things, share news, and ask questions on [GitLab]. There's also a mirror on 
+[GitHub], but that's just for looking at, not for talking. Note that we depend solely on the [proc(5) man 
+page]. You can also use other sources mentioned in the "SEE ALSO" section of that man page. When contributing, 
+strictly follow these sources. Do not use information from elsewhere.
 
-# Step 1: Clone the source code
+# Style guide
 
-We encourage direct contributions through GitLab, our primary code hosting platform. However, if 
-you find it more convenient, you can still submit pull requests from Github.
+Refer to the [Go Code Style Guide] for guidance on the recommended layout of Go code and some 
+style guide notes. Additionally, the [Google Go Style Guide] is a useful resource for 
+understanding and crafting high-quality source code.
 
-    % git clone https://gitlab.com/nzv/prc.git
-    % cd prc
-    % vi ...
+# Reporting bugs
 
-> Follow "[Effective Go][2]" for contributions. Thanks!
+To report bugs, use the "Bug" template in the [GitLab] repository. When using this template for an issue 
+related to a feature or change, CC the responsible developers if known. This increases the chance of 
+them reviewing and commenting. If you're uncertain about the developers, consult the git logs for the 
+necessary information.
 
-# Step 2: Test your changes
-
-Before submitting your code, conduct thorough testing using the provided Makefile. Run all tests in the project with:
-
-    % make test
-
-To test only a specific directory, modify the "DIR" environment variable. For instance, to test only the `tty` directory:
-
-    % make DIR=tty test
-
-# Step 4: Send changes for review
-
-Follow Golang's commit message guidelines [here][3]. Our project aligns with these recommendations. Thanks!
-
-    TODO
-
-[0]: https://www.kernel.org/doc/Documentation/filesystems/proc.rst
-[1]: https://www.kernel.org/doc/man-pages/online/pages/man5/proc.5.html
-[2]: https://go.dev/doc/effective_go
-[3]: https://go.dev/doc/contribute#commit_messages
+[GitLab]: https://gitlab.com/nzv/prc
+[GitHub]: https://gitlab.com/nnzv/prc
+[proc(5) man page]: https://www.kernel.org/doc/man-pages/online/pages/man5/proc.5.html
+[Go Code Style Guide]: https://go.dev/doc/effective_go.html
+[Google Go Style Guide]: https://google.github.io/styleguide/go/guide
