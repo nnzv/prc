@@ -7,10 +7,11 @@
 package kernel
 
 import (
-	"reflect"
+	"fmt"
 	"testing"
 
 	"gitlab.com/nzv/prc"
+	"gitlab.com/nzv/prc/internal"
 )
 
 func TestSwaps(t *testing.T) {
@@ -48,8 +49,8 @@ func TestSwaps(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if !reflect.DeepEqual(got, tc.want) {
-				t.Errorf("swaps mismatch: got %+v, want %+v", got, tc.want)
+			for i := range got {
+				internal.Diff(t, fmt.Sprintf("#%d", i), &got[i], &tc.want[i])
 			}
 		})
 	}

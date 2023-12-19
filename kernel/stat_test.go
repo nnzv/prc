@@ -7,10 +7,10 @@
 package kernel
 
 import (
-	"reflect"
 	"testing"
 
 	"gitlab.com/nzv/prc"
+	"gitlab.com/nzv/prc/internal"
 )
 
 func TestStat(t *testing.T) {
@@ -79,9 +79,7 @@ func TestStat(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if !reflect.DeepEqual(got, tc.want) {
-				t.Errorf("stat mismatch: got %+v, want %+v", got, tc.want)
-			}
+			internal.Diff(t, "stats", got, tc.want)
 		})
 	}
 }
