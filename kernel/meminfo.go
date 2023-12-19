@@ -8,6 +8,8 @@ package kernel
 
 import "gitlab.com/nzv/prc/internal"
 
+// MemInfo retrieves memory distribution and utilization
+// as a map of fields and sizes (in KB).
 func MemInfo() (map[string]uint64, error) {
 	f, err := internal.Open("meminfo")
 	if err != nil {
