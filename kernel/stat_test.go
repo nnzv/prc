@@ -19,11 +19,11 @@ func TestStat(t *testing.T) {
 
 	tests := []struct {
 		desc string
-		want *Stat
+		want Stat
 	}{
 		{
 			desc: "ok stat",
-			want: &Stat{
+			want: Stat{
 				CPU: map[string]CPUStat{
 					"cpu": {
 						User:      123,
@@ -79,7 +79,7 @@ func TestStat(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			internal.Diff(t, "stats", got, tc.want)
+			internal.Diff(t, "stats", &got, &tc.want)
 		})
 	}
 }
