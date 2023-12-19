@@ -55,6 +55,7 @@ func ParseUint64(from string, base int, bitSize int) (uint64, error) {
 	return to, nil
 }
 
+// ParseCommaList parses a comma-separated string and returns a slice of strings.
 func ParseCommaList(from string) []string {
 	if from[len(from)-1:] == "," {
 		return []string{from[:len(from)-1]}
