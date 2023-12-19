@@ -37,14 +37,14 @@ type CPUStat struct {
 }
 
 // Stats returns architecture-dependent kernel/system statistics.
-func Stats() (*Stat, error) {
+func Stats() (Stat, error) {
 	f, err := internal.Open("stat")
 	if err != nil {
-		return nil, err
+		return Stat{}, err
 	}
 	defer f.Close()
 
-	data := &Stat{
+	data := Stat{
 		CPU:     make(map[string]CPUStat),
 		Intr:    make([]uint64, 0),
 		SoftIRQ: make([]uint64, 0),
@@ -59,7 +59,7 @@ func Stats() (*Stat, error) {
 		for _, x := range fields[1:] { // skip row columns
 			v, err := internal.ParseUint64(x, 10, 64)
 			if err != nil {
-				return nil, &internal.ParseError{Path: f.Path, Field: fields[0], Err: err}
+				return Stat{}, &internal.ParseError{Path: f.Path, Field: fields[0], Err: err}
 			}
 			vals = append(vals, v)
 		}
