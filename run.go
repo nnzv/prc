@@ -71,11 +71,11 @@ func run(cmd string, args ...string) {
 	c := exec.Command(cmd, args...)
 	log.Println(c.String())
 	c.Stdout = &out
-	c.Stderr = os.Stderr
+	c.Stderr = c.Stdout
 	if err := c.Run(); err != nil {
-		log.Fatalf("run: %s", err)
+		log.Printf("run: %s", err)
 	}
 	if out.Len() > 0 {
-		log.Print(&out)
+		log.Print(c.Stdout)
 	}
 }
