@@ -13,6 +13,17 @@ import (
 	"gitlab.com/nzv/prc/kernel"
 )
 
+func ExampleModules() {
+	mod, err := kernel.Modules()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+	for _, v := range mod {
+		fmt.Printf("%s\n", v.Name)
+	}
+}
+
 func ExampleMemInfo() {
 	mem, err := kernel.MemInfo()
 	if err != nil {
