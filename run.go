@@ -25,45 +25,62 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"
 )
 
 var out bytes.Buffer
-var dir string // flags
+
+type args struct {
+	dir    string // env
+	test   bool
+	site   bool
+	report bool
+	fmt    bool
+	check  bool
+}
+
+var cli args
 
 func init() {
-	flag.StringVar(&dir, "dir", "./...", "specify the directory for Go commands")
+	flag.BoolVar(&cli.test, "test", false, "Run tests with verbose output and count=1")
+	flag.BoolVar(&cli.site, "site", false, "Open pkgsite")
+	flag.BoolVar(&cli.report, "report", false, "Run tests for generating a report")
+	flag.BoolVar(&cli.fmt, "fmt", false, "Format code using gofmt with write and simplify options")
+	flag.BoolVar(&cli.check, "check", false, "Check code formatting with gofmt and run go vet")
 	flag.Usage = func() {
 		log.Println("usage of run: ")
 		flag.PrintDefaults()
+	}
+	cli.dir = "./..."
+	val, ok := os.LookupEnv("DIR")
+	if ok {
+		cli.dir = val
 	}
 	log.SetFlags(0)
 }
 
 func main() {
 	flag.Parse()
-	dir, err := filepath.Abs(dir)
+	dir, err := filepath.Abs(cli.dir)
 	if err != nil {
 		log.Fatal(err)
 	}
-	t := strings.TrimSpace(flag.Arg(0))
-	switch t {
-	case "test", "":
+	switch {
+	case cli.test:
 		run("go", "test", "-v", "-count=1", dir)
-	case "site":
+	case cli.site:
 		run("pkgsite", "-open")
-	case "report":
+	case cli.report:
 		run("go", "test", "-run=TestGenerateReport")
-	case "fmt":
+	case cli.fmt:
 		run("gofmt", "-w", "-s", ".")
-	case "check":
+	case cli.check:
 		run("gofmt", "-l", ".")
 		if out.Len() > 0 {
 			os.Exit(1)
 		}
 		run("go", "vet", dir)
 	default:
-		log.Fatalf("run: unknown target %#v\n", t)
+		flag.Usage()
 	}
 }
 
