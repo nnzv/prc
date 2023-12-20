@@ -13,6 +13,17 @@ import (
 	"gitlab.com/nzv/prc/kernel"
 )
 
+func ExampleMemInfo() {
+	mem, err := kernel.MemInfo()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+	for k, v := range mem {
+		fmt.Printf("%s: %d KB\n", k, v)
+	}
+}
+
 func ExampleUptime() {
 	boot, idle, err := kernel.Uptime()
 	if err != nil {
