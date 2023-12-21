@@ -51,8 +51,7 @@ func init() {
 		flag.PrintDefaults()
 	}
 	cli.dir = "./..."
-	val, ok := os.LookupEnv("DIR")
-	if ok {
+	if val, ok := os.LookupEnv("DIR"); ok {
 		cli.dir = val
 	}
 	log.SetFlags(0)
