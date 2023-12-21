@@ -71,7 +71,7 @@ func Open(path string) (File, error) {
 	if err != nil {
 		return File{}, err
 	}
-    // ugly implementation for gz files
+	// ugly implementation for gz files
 	if filepath.Ext(path) == ".gz" {
 		if stat.Size() < 1 {
 			return File{}, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
