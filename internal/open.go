@@ -9,6 +9,7 @@ package internal
 import (
 	"bufio"
 	"bytes"
+	"compress/gzip"
 	"errors"
 	"fmt"
 	"io"
@@ -41,9 +42,11 @@ func (f *File) Scan() bool { return f.s.Scan() }
 // SplitWords configures the scanner to split words using [bufio.ScanWords].
 func (f *File) SplitWords() { f.s.Split(bufio.ScanWords) }
 
+func (f *File) Text() string { return f.s.Text() }
+
 // ScanFields scans the current line of the file, splitting it into fields using whitespace.
 // Returns a slice of strings representing the fields.
-func (f *File) ScanFields() []string { return strings.Fields(f.s.Text()) }
+func (f *File) ScanFields() []string { return strings.Fields(f.Text()) }
 
 // Open opens a proc file specified by the given path and returns a [File] and an error, if any.
 // In the presence of any error, the returned file will be an empty instance of [File]. It
@@ -67,6 +70,21 @@ func Open(path string) (File, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return File{}, err
+	}
+    // ugly implementation for gz files
+	if filepath.Ext(path) == ".gz" {
+		if stat.Size() < 1 {
+			return File{}, &ProcError{Op: "open", Path: path, Err: ErrFileIsEmpty}
+		}
+		fz, err := gzip.NewReader(f)
+		if err != nil {
+			return File{}, err
+		}
+		s := bufio.NewScanner(fz)
+		if err := s.Err(); err != nil {
+			return File{}, &ProcError{Op: "scan", Path: path, Err: err}
+		}
+		return File{path, f, s}, nil
 	}
 	buf := new(bytes.Buffer) // file writer
 	bts, err := io.ReadAll(io.TeeReader(f, buf))
