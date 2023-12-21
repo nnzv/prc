@@ -13,6 +13,20 @@ import (
 	"gitlab.com/nzv/prc/kernel"
 )
 
+func ExampleConfig() {
+	cfg, err := kernel.Config()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+	val, ok := cfg["CONFIG_WERROR"]
+	if !ok {
+		fmt.Println("CONFIG_WERROR is not set")
+		os.Exit(2)
+	}
+	fmt.Println(val)
+}
+
 func ExampleModules() {
 	mod, err := kernel.Modules()
 	if err != nil {
