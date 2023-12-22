@@ -22,7 +22,7 @@ func MemInfo() (map[string]uint64, error) {
 	for f.Scan() {
 		fields := f.ScanFields()
 
-		name := fields[0][:len(fields[0])-1]
+        name := fields[0][:len(fields[0])-1] // remove ':'
 
 		data[name], err = internal.ParseUint64(fields[1], 10, 64)
 		if err != nil {
